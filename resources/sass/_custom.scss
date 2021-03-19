@@ -1,0 +1,14 @@
+// Sidebar custom style
+
+.c-sidebar.c-sidebar-light .c-sidebar-brand {
+    background: #ffffff;
+}
+
+.c-header-brand {
+    min-height: 46px;
+}
+
+.c-sidebar.c-sidebar-light .c-sidebar-nav-dropdown.c-show .c-sidebar-nav-link:hover,
+.c-sidebar.c-sidebar-light .c-sidebar-nav-dropdown.c-show .c-sidebar-nav-dropdown-toggle:hover {
+    color: #ffffff;
+}
