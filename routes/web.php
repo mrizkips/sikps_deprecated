@@ -11,12 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', 'LandingPageController@index')->name('landingpage');
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/beranda', 'BerandaController@index')->name('beranda.index');
+Route::middleware(['auth', 'auth:superadmin'])->group(function () {
+    Route::get('/beranda', 'BerandaController@index')->name('beranda');
+});
+
+Route::group([
+    'prefix' => 'mahasiswa',
+    'as' => 'mahasiswa.',
+    'namespace' => 'Mahasiswa',
+    'middleware' => ['auth','auth:mahasiswa']],
+function() {
+    Route::get('/beranda', 'BerandaController@index')->name('beranda');
 });

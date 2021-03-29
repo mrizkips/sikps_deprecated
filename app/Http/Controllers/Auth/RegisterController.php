@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Services\MahasiswaService;
+use Exception;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -49,24 +55,34 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'nama' => ['required', 'string', 'max:60'],
+            'email' => ['required', 'string', 'email', 'max:60', 'unique:users'],
+            'nim' => ['required', 'numeric', 'digits:7', 'unique:mahasiswa'],
+            'jen_kel' => ['required', Rule::in(config('constant.jen_kel'))],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ], [], trans('login.attributes'));
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Handle a registration request for the application.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected function create(array $data)
+    public function register(Request $request, MahasiswaService $service)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $this->validator($request->all())->validate();
+
+        if ($service->create($request->all())) {
+            return redirect()->route('login')->with('flash_messages', [
+                'type' => 'success',
+                'message' => trans('login.register_success'),
+            ]);
+        }
+
+        return redirect()->back()->with('flash_messages', [
+            'type' => 'danger',
+            'message' => trans('login.register_failed'),
         ]);
     }
 }

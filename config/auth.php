@@ -46,6 +46,36 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'superadmin' => [
+            'driver' => 'session',
+            'provider' => 'superadmin',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+
+        'mahasiswa' => [
+            'driver' => 'session',
+            'provider' => 'mahasiswa',
+        ],
+
+        'dosen' => [
+            'driver' => 'session',
+            'provider' => 'dosen',
+        ],
+
+        'keuangan' => [
+            'driver' => 'session',
+            'provider' => 'keuangan',
+        ],
+
+        'baak' => [
+            'driver' => 'session',
+            'provider' => 'baak',
+        ],
     ],
 
     /*
@@ -67,6 +97,36 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'superadmin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'mahasiswa' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'dosen' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'keuangan' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'baak' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],

@@ -34,6 +34,16 @@ class User extends Authenticatable
      */
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    /**
+     * Get mahasiswa on a certain user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class);
     }
 }

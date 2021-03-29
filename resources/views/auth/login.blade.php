@@ -9,7 +9,7 @@
                         <div class="card-body">
                             @include('components.alert')
                             <div class="text-center">
-                                <a href="#"><img src="{{ asset('assets/img/stmik-logo.png') }}" alt="STMIK Logo" class="text-center img-fluid mb-4" width="200px"></a>
+                                <a href="{{ route('landingpage') }}"><img src="{{ asset('assets/img/stmik-logo.png') }}" alt="STMIK Logo" class="text-center img-fluid mb-4" width="200px"></a>
                             </div>
                             <h1>Login</h1>
                             <p class="text-muted">Silakan melakukan login.</p>
@@ -19,7 +19,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="cil-user"></i>
+                                                <i class="cil-envelope-closed"></i>
                                             </span>
                                         </div>
                                         <input class="form-control @error('email') is-invalid @enderror" type="email" placeholder="{{ trans('login.placeholders.email') }}" name="email" value="{{ old('email') }}" required autofocus>
@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="input-group mb-2">
+                                    <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
                                                 <i class="cil-lock-locked"></i>
@@ -54,6 +54,7 @@
                                                     Ingat Saya
                                                 </label>
                                             </div>
+                                            <a href="{{ route('register') }}" class="btn btn-link">Belum punya akun?</a>
                                         </div>
                                     </div>
                                 </div>
