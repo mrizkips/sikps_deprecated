@@ -21321,3 +21321,7 @@ body {
   color: #ffffff;
 }
 
+div.dataTables_wrapper div.dataTables_length select {
+  padding-right: 1.5rem;
+}
+

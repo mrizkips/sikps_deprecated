@@ -32,6 +32,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Styles -->
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Icons -->
@@ -63,6 +64,8 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     @yield('javascript')
 </body>
 </html>

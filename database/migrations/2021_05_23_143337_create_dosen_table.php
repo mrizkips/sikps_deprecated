@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMahasiswaTable extends Migration
+class CreateDosenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateMahasiswaTable extends Migration
      */
     public function up()
     {
-        Schema::create('mahasiswa', function (Blueprint $table) {
+        Schema::create('dosen', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->string('nim', 7)->unique();
+            $table->string('nidn', 20)->unique();
             $table->unsignedBigInteger('user_id');
             $table->char('no_hp', 13);
             $table->enum('jen_kel', ['Laki-laki', 'Perempuan']);
@@ -36,6 +36,6 @@ class CreateMahasiswaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahasiswa');
+        Schema::dropIfExists('dosen');
     }
 }

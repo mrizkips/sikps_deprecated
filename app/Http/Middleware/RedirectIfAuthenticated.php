@@ -17,7 +17,7 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard('superadmin')->check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect('/beranda');
         } else if (Auth::guard('mahasiswa')->check()) {
             return redirect('/mahasiswa/beranda');

@@ -12,3 +12,9 @@
 .c-sidebar.c-sidebar-light .c-sidebar-nav-dropdown.c-show .c-sidebar-nav-dropdown-toggle:hover {
     color: #ffffff;
 }
+
+// Datatable custom style
+
+div.dataTables_wrapper div.dataTables_length select {
+    padding-right: 1.5rem;
+}

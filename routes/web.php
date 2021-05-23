@@ -15,15 +15,22 @@ Route::get('/', 'LandingPageController@index')->name('landingpage');
 
 Auth::routes();
 
-Route::middleware(['auth', 'auth:superadmin'])->group(function () {
+Route::group([
+    'namespace' => 'Admin',
+    'middleware' => ['auth', 'auth:admin']
+],
+function () {
     Route::get('/beranda', 'BerandaController@index')->name('beranda');
+    Route::resource('dosen', 'DosenController')->except(['show']);
+
 });
 
 Route::group([
     'prefix' => 'mahasiswa',
     'as' => 'mahasiswa.',
     'namespace' => 'Mahasiswa',
-    'middleware' => ['auth','auth:mahasiswa']],
+    'middleware' => ['auth','auth:mahasiswa']
+],
 function() {
     Route::get('/beranda', 'BerandaController@index')->name('beranda');
 });

@@ -46,4 +46,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Mahasiswa::class);
     }
+
+    /**
+     * Get mahasiswa on a certain user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function dosen()
+    {
+        return $this->hasOne(Dosen::class);
+    }
 }

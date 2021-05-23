@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,8 @@ class MahasiswaService
         DB::beginTransaction();
         try {
             $data['password'] = Hash::make($data['password']);
-            $data['role_id'] = 3;
+            $role = Role::where('nama', 'mahasiswa')->first();
+            $data['role_id'] = $role->id;
 
             $user = new User();
             $user->fill($data);
