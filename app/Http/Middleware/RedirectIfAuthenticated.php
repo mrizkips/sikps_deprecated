@@ -18,9 +18,11 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard('admin')->check()) {
-            return redirect('/beranda');
+            return redirect()->route('admin.beranda');
         } else if (Auth::guard('mahasiswa')->check()) {
-            return redirect('/mahasiswa/beranda');
+            return redirect()->route('mahasiswa.beranda');
+        } else if (Auth::guard('dosen')->check()) {
+            return redirect()->route('dosen.beranda');
         }
 
         return $next($request);

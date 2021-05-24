@@ -24,9 +24,10 @@ class DosenController extends Controller
             return DataTables::eloquent($dosen)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $edit = view('components.edit', ['url' => route('dosen.edit', $row->id)]);
-                    $destroy = view('components.delete', ['url' => route('dosen.destroy', $row->id)]);
-                    return $edit.$destroy;
+                    $show = view('components.show', ['url' => route('admin.dosen.show', $row->id)]);
+                    $edit = view('components.edit', ['url' => route('admin.dosen.edit', $row->id)]);
+                    $destroy = view('components.delete', ['url' => route('admin.dosen.destroy', $row->id)]);
+                    return $show.$edit.$destroy;
 
                 })
                 ->rawColumns(['action'])
@@ -49,6 +50,7 @@ class DosenController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\DosenRequest  $request
+     * @param  DosenService $service
      * @return \Illuminate\Http\Response
      */
     public function store(DosenRequest $request, DosenService $service)
@@ -59,7 +61,7 @@ class DosenController extends Controller
 
         $fields = $request->all();
         if ($service->create($fields)) {
-            return redirect()->route('dosen.index')->with('flash_messages', [
+            return redirect()->route('admin.dosen.index')->with('flash_messages', [
                 'type' => 'success',
                 'message' => trans('dosen.messages.success.create'),
             ]);
@@ -69,6 +71,17 @@ class DosenController extends Controller
             'type' => 'danger',
             'message' => trans('dosen.messages.errors.create'),
         ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  Dosen $dosen
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Dosen $dosen)
+    {
+        return view('admin.dosen.show', compact('dosen'));
     }
 
     /**
@@ -87,6 +100,7 @@ class DosenController extends Controller
      *
      * @param  \Illuminate\Http\DosenRequest  $request
      * @param  Dosen $dosen
+     * @param  DosenService $service
      * @return \Illuminate\Http\Response
      */
     public function update(DosenRequest $request, Dosen $dosen, DosenService $service)
@@ -99,7 +113,7 @@ class DosenController extends Controller
         }
 
         if ($service->update($dosen, $fields)) {
-            return redirect()->route('dosen.index')->with('flash_messages', [
+            return redirect()->route('admin.dosen.index')->with('flash_messages', [
                 'type' => 'success',
                 'message' => trans('dosen.messages.success.update'),
             ]);
@@ -115,25 +129,26 @@ class DosenController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     * @param  DosenService $service
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, DosenService $service)
     {
         if (!$dosen = Dosen::find($id)) {
-            return redirect()->back()->with('alert', [
+            return redirect()->back()->with('flash_messages', [
                 'type' => 'danger',
                 'message' => trans('dosen.messages.errors.not_found'),
             ]);
         }
 
         if($service->delete($dosen)) {
-            return redirect()->back()->with('alert', [
+            return redirect()->back()->with('flash_messages', [
                 'type' => 'success',
                 'message' => trans('dosen.messages.success.delete'),
             ]);
         }
 
-        return redirect()->back()->with('alert', [
+        return redirect()->back()->with('flash_messages', [
             'type' => 'danger',
             'message' => trans('dosen.messages.errors.delete'),
         ]);

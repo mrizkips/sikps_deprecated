@@ -16,21 +16,35 @@ Route::get('/', 'LandingPageController@index')->name('landingpage');
 Auth::routes();
 
 Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.',
     'namespace' => 'Admin',
-    'middleware' => ['auth', 'auth:admin']
+    'middleware' => ['auth:admin'],
 ],
 function () {
-    Route::get('/beranda', 'BerandaController@index')->name('beranda');
-    Route::resource('dosen', 'DosenController')->except(['show']);
-
+    Route::get('beranda', 'BerandaController@index')->name('beranda');
+    Route::resource('mahasiswa', 'MahasiswaController')->except(['create', 'store']);
+    Route::resource('dosen', 'DosenController');
 });
 
 Route::group([
     'prefix' => 'mahasiswa',
     'as' => 'mahasiswa.',
     'namespace' => 'Mahasiswa',
-    'middleware' => ['auth','auth:mahasiswa']
+    'middleware' => ['auth:mahasiswa']
 ],
 function() {
-    Route::get('/beranda', 'BerandaController@index')->name('beranda');
+    Route::get('beranda', 'BerandaController@index')->name('beranda');
+    Route::resource('mahasiswa', 'MahasiswaController')->except(['create', 'store', 'index', 'destroy']);
+});
+
+Route::group([
+    'prefix' => 'dosen',
+    'as' => 'dosen.',
+    'namespace' => 'Dosen',
+    'middleware' => ['auth:dosen']
+],
+function() {
+    Route::get('beranda', 'BerandaController@index')->name('beranda');
+    Route::resource('dosen', 'DosenController')->except(['create', 'store', 'index', 'destroy']);
 });

@@ -83,8 +83,7 @@ class DosenService
     {
         DB::beginTransaction();
         try {
-            $dosen->user()->delete();
-            $commit = $dosen->fresh();
+            $commit = $dosen->user()->delete();
             DB::commit();
         } catch (Exception $e) {
             $commit = false;
