@@ -23,6 +23,8 @@ Route::group([
 ],
 function () {
     Route::get('beranda', 'BerandaController@index')->name('beranda');
+    Route::get('edit_password', 'BerandaController@edit_password')->name('edit_password');
+    Route::put('edit_password', 'BerandaController@edit_password')->name('edit_password');
     Route::resource('mahasiswa', 'MahasiswaController')->except(['create', 'store']);
     Route::resource('dosen', 'DosenController');
 });

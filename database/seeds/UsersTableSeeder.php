@@ -18,6 +18,16 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin',
             'password' => Hash::make('admin'),
             'role_id' => 1,
+        ], [
+            'nama' => 'Keuangan',
+            'email' => 'keuangan',
+            'password' => Hash::make('keuangan'),
+            'role_id' => 4,
+        ], [
+            'nama' => 'BAAK',
+            'email' => 'baak',
+            'password' => Hash::make('baak'),
+            'role_id' => 5,
         ]);
     }
 }

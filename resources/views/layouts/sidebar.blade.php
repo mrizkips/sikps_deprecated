@@ -18,6 +18,10 @@
             </li>
         </ul>
     </li>
+    <li class="c-sidebar-nav-title">Pengaturan</li>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.edit_password') }}">
+        <i class="cil-lock-locked c-sidebar-nav-icon"></i> Ganti Password</a>
+    </li>
 </ul>
 @elseif(Auth::guard('mahasiswa')->check())
 @include('mahasiswa.sidebar')

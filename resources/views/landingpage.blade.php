@@ -52,7 +52,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
                     @auth
-                    <li class="nav-item"><a class="nav-link link text-black display-4" href="{{ route('beranda') }}">
+                    <li class="nav-item"><a class="nav-link link text-black display-4" href="{{
+                        Auth::guard('admin')->check() ? route('admin.beranda') :
+                        (Auth::guard('mahasiswa')->check() ? route('mahasiswa.beranda') :
+                        (Auth::guard('dosen')-> check() ? route('dosen.beranda') : route('landingpage')))
+                        }}">
                         Beranda</a></li>
                     @endauth
                     <li class="nav-item"><a class="nav-link link text-black display-4" href="#">
