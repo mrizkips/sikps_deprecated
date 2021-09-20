@@ -1,24 +1,24 @@
 @extends('layouts.base')
 
-@section('title', 'Daftar Dosen - '.config('app.name'))
+@section('title', 'Pendaftaran - '.config('app.name'))
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item active">Dosen</li>
+    <li class="breadcrumb-item active">Pendaftaran</li>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="fade-in">
-            <h3 class="mb-4"><strong><i class="cil-education">
-                </i>&nbsp;Dosen</strong>
+            <h3 class="mb-4"><strong><i class="cil-notes">
+                </i>&nbsp;Pendaftaran</strong>
             </h3>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card card-accent-primary">
                         <div class="card-header">
-                            <strong class="text-primary">Daftar Dosen</strong>
-                            <a href="{{ route('admin.dosen.create') }}" class="btn btn-primary float-right">
-                                <i class="cil-plus"></i> Tambah Dosen
+                            <strong class="text-primary">List Pendaftaran</strong>
+                            <a href="{{ route('admin.pendaftaran.create') }}" class="btn btn-primary float-right">
+                                <i class="cil-plus"></i> Tambah Pendaftaran
                             </a>
                         </div>
                         <div class="card-body">
@@ -27,10 +27,10 @@
                                     <thead>
                                         <tr>
                                             <td width="30px">#</td>
-                                            <td>NIDN</td>
-                                            <td>Nama</td>
-                                            <td>Email</td>
-                                            <td>No. HP</td>
+                                            <td>Judul</td>
+                                            <td>Jenis</td>
+                                            <td>Tanggal Pembuka</td>
+                                            <td>Tanggal Penutup</td>
                                             <td>Tanggal Dibuat</td>
                                             <td>Aksi</td>
                                         </tr>
@@ -57,13 +57,13 @@
             },
             processing: true,
             serverSide: true,
-            ajax: "{{ route('admin.dosen.index') }}",
+            ajax: "{{ route('admin.pendaftaran.index') }}",
             columns: [
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
-                {data: 'nidn', name: 'nidn'},
-                {data: 'user.nama', name: 'user.nama'},
-                {data: 'user.email', name: 'user.email'},
-                {data: 'no_hp', name: 'no_hp'},
+                {data: 'judul', name: 'judul'},
+                {data: 'jenis', name: 'jenis'},
+                {data: 'awal', name: 'awal'},
+                {data: 'akhir', name: 'akhir'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', 'searchable': false, orderable: false}
             ],

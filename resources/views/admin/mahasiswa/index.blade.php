@@ -19,22 +19,24 @@
                             <strong class="text-primary">Daftar Mahasiswa</strong>
                         </div>
                         <div class="card-body">
-                            <table class="table table-striped" width="100%" id="dataTable">
-                                <thead>
-                                    <tr>
-                                        <td width="30px">#</td>
-                                        <td>NIM</td>
-                                        <td>Nama</td>
-                                        <td>Email</td>
-                                        <td>No. HP</td>
-                                        <td>Tanggal Dibuat</td>
-                                        <td>Aksi</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <div class="table-responsive">
+                                <table class="table table-striped" width="100%" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <td width="30px">#</td>
+                                            <td>NIM</td>
+                                            <td>Nama</td>
+                                            <td>Email</td>
+                                            <td>No. HP</td>
+                                            <td>Tanggal Dibuat</td>
+                                            <td>Aksi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

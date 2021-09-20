@@ -25,8 +25,16 @@ function () {
     Route::get('beranda', 'BerandaController@index')->name('beranda');
     Route::get('edit_password', 'BerandaController@edit_password')->name('edit_password');
     Route::put('edit_password', 'BerandaController@edit_password')->name('edit_password');
+
+    // Data Pengguna
     Route::resource('mahasiswa', 'MahasiswaController')->except(['create', 'store']);
     Route::resource('dosen', 'DosenController');
+    Route::resource('keuangan', 'KeuanganController');
+    Route::resource('baak', 'BaakController');
+
+    // KP & Skripsi
+    Route::resource('pendaftaran', 'PendaftaranController')->except(['show']);
+    Route::resource('proposal', 'ProposalController')->except(['create', 'store']);
 });
 
 Route::group([

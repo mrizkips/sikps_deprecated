@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateTableStatus extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->engine = "InnoDB";
+        Schema::create('status', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->string('nama', 60);
-            $table->string('email', 60)->unique();
-            $table->string('password', 100);
-            $table->unsignedTinyInteger('role_id');
-            $table->rememberToken();
+            $table->enum('tipe', ['Menunggu', 'Disetujui', 'Ditolak']);
+            $table->unsignedBigInteger('statusable_id');
+            $table->string('statusable_type', 60);
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('status');
     }
 }
