@@ -16,4 +16,9 @@ return [
         'Disetujui',
         'Ditolak'
     ],
+
+    'jenis_proposal' => [
+        'Skripsi',
+        'Kerja Praktek'
+    ],
 ];

@@ -29,4 +29,12 @@ class Status extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * Get a certain records.
+     */
+    public function approval()
+    {
+        return $this->hasMany(Approval::class, 'status_id');
+    }
 }

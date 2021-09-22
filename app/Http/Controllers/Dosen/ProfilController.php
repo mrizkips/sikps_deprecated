@@ -7,9 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DosenRequest;
 use App\Models\Dosen;
 use App\Services\DosenService;
-use Yajra\DataTables\Facades\DataTables;
 
-class DosenController extends Controller
+class ProfilController extends Controller
 {
     /**
      * Display the specified resource.
@@ -30,8 +29,7 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
-        $updateRoute = route('dosen.dosen.update', $dosen->id);
-        return view('dosen.edit', compact('dosen', 'updateRoute'));
+        return view('dosen.edit', compact('dosen'));
     }
 
     /**
@@ -52,7 +50,7 @@ class DosenController extends Controller
         }
 
         if ($service->update($dosen, $fields)) {
-            return redirect()->route('admin.dosen.index')->with('flash_messages', [
+            return redirect()->back()->with('flash_messages', [
                 'type' => 'success',
                 'message' => trans('dosen.messages.success.update'),
             ]);

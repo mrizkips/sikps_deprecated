@@ -34,7 +34,9 @@ function () {
 
     // KP & Skripsi
     Route::resource('pendaftaran', 'PendaftaranController')->except(['show']);
-    Route::resource('proposal', 'ProposalController')->except(['create', 'store']);
+    Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'edit', 'update']);
+    Route::post('proposal/{proposal}/approval', 'ProposalController@approval')->name('proposal.approval');
+    Route::post('proposal/{proposal}/assign', 'ProposalController@assign')->name('proposal.assign');
 });
 
 Route::group([
@@ -45,7 +47,12 @@ Route::group([
 ],
 function() {
     Route::get('beranda', 'BerandaController@index')->name('beranda');
-    Route::resource('mahasiswa', 'MahasiswaController')->except(['create', 'store', 'index', 'destroy']);
+    Route::get('profil/{mahasiswa}', 'ProfilController@show')->name('profil.show');
+    Route::get('profil/{mahasiswa}/edit', 'ProfilController@edit')->name('profil.edit');
+    Route::put('profil/{mahasiswa}', 'ProfilController@update')->name('profil.update');
+
+    // KP & Skripsi
+    Route::resource('proposal', 'ProposalController');
 });
 
 Route::group([
@@ -56,5 +63,44 @@ Route::group([
 ],
 function() {
     Route::get('beranda', 'BerandaController@index')->name('beranda');
-    Route::resource('dosen', 'DosenController')->except(['create', 'store', 'index', 'destroy']);
+    Route::get('profil/{dosen}', 'ProfilController@show')->name('profil.show');
+    Route::get('profil/{dosen}/edit', 'ProfilController@edit')->name('profil.edit');
+    Route::put('profil/{dosen}', 'ProfilController@update')->name('profil.update');
+
+    // KP & Skripsi
+    Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'destroy', 'edit', 'update']);
+});
+
+Route::group([
+    'prefix' => 'baak',
+    'as' => 'baak.',
+    'namespace' => 'Baak',
+    'middleware' => ['auth:baak']
+],
+function() {
+    Route::get('beranda', 'BerandaController@index')->name('beranda');
+    Route::get('profil/{baak}', 'ProfilController@show')->name('profil.show');
+    Route::get('profil/{baak}/edit', 'ProfilController@edit')->name('profil.edit');
+    Route::put('profil/{baak}', 'ProfilController@update')->name('profil.update');
+
+    // KP & Skripsi
+    Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'destroy', 'edit', 'update']);
+    Route::post('proposal/{proposal}/approval', 'ProposalController@approval')->name('proposal.approval');
+});
+
+Route::group([
+    'prefix' => 'keuangan',
+    'as' => 'keuangan.',
+    'namespace' => 'Keuangan',
+    'middleware' => ['auth:keuangan']
+],
+function() {
+    Route::get('beranda', 'BerandaController@index')->name('beranda');
+    Route::get('profil/{keuangan}', 'ProfilController@show')->name('profil.show');
+    Route::get('profil/{keuangan}/edit', 'ProfilController@edit')->name('profil.edit');
+    Route::put('profil/{keuangan}', 'ProfilController@update')->name('profil.update');
+
+    // KP & Skripsi
+    Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'destroy', 'edit', 'update']);
+    Route::post('proposal/{proposal}/approval', 'ProposalController@approval')->name('proposal.approval');
 });

@@ -19,7 +19,7 @@ class Proposal extends Model
      * @var array
      */
     protected $fillable = [
-        'judul', 'jenis', 'mahasiswa_id', 'dokumen', 'kbb_id', 'tanggal_kontrak', 'dosen_id',
+        'judul', 'jenis', 'mahasiswa_id', 'dokumen', 'pendaftaran_id', 'kbb_id', 'tanggal_kontrak', 'dosen_id',
     ];
 
     /**
@@ -27,7 +27,7 @@ class Proposal extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id');
     }
@@ -58,5 +58,13 @@ class Proposal extends Model
     public function status()
     {
         return $this->morphOne(Status::class, 'statusable');
+    }
+
+    /**
+     * Get a certain records.
+     */
+    public function pendaftaran()
+    {
+        return $this->belongsTo(Pendaftaran::class, 'pendaftaran_id', 'id');
     }
 }

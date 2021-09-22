@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', "{$mahasiswa->user->nama} - ".config('app.name'))
+@section('title', "Profil {$mahasiswa->user->nama} - ".config('app.name'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">{{ $mahasiswa->user->nama }}</li>

@@ -9,7 +9,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="fade-in">
-            <h3 class="mb-4"><strong><i class="cil-notes">
+            <h3 class="mb-4"><strong><i class="cil-task">
                 </i>&nbsp;Proposal</strong>
             </h3>
             <div class="row">
@@ -20,14 +20,15 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" width="100%" id="dataTable">
+                                <table class="table table-striped" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <td width="30px">#</td>
+                                            <td>#</td>
                                             <td>Judul</td>
                                             <td>Jenis</td>
                                             <td>Nama Mahasiswa</td>
                                             <td>KBB</td>
+                                            <td>Status</td>
                                             <td>Dosen Pembimbing</td>
                                             <td>Tanggal Dibuat</td>
                                             <td>Aksi</td>
@@ -60,13 +61,19 @@
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
                 {data: 'judul', name: 'judul'},
                 {data: 'jenis', name: 'jenis'},
-                {data: 'mahasiswa.user.name', name: 'mahasiswa.user.name'},
-                {data: 'kbb', name: 'kbb'},
-                {data: 'dosen.user.name', name: 'dosen.user.name'},
+                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama', orderable: false},
+                {data: 'kbb.nama', name: 'kbb.nama', orderable: false},
+                {data: 'tipe', name: 'tipe', searchable: false, orderable:false},
+                {data: 'dosen', name: 'dosen', searchable: false, orderable:false, render: function(data, type) {
+                    if (data === null) {
+                        return "-"
+                    }
+                    return data.user.nama
+                }},
                 {data: 'created_at', name: 'created_at'},
-                {data: 'action', name: 'action', 'searchable': false, orderable: false}
+                {data: 'action', name: 'action', searchable: false, orderable: false}
             ],
-            order: ['6', 'desc']
+            order: ['7', 'desc']
         });
     });
 </script>

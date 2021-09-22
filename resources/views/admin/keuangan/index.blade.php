@@ -23,10 +23,10 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" width="100%" id="dataTable">
+                                <table class="table table-striped" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <td width="30px">#</td>
+                                            <td>#</td>
                                             <td>NIP</td>
                                             <td>Nama</td>
                                             <td>Email</td>

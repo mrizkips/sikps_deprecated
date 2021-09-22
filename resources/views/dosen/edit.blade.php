@@ -9,11 +9,11 @@
 @section('content')
 <div class="container-fluid">
     <div class="fade-in">
-        <h3 class="mb-4"><strong><i class="cil-education">
+        <h3 class="mb-4"><strong><i class="cil-people">
             </i>&nbsp;Form</strong>&nbsp;<small>Edit Profil</small>
         </h3>
         <small class="text-danger"><em>Isian bertanda (*) wajib diisi</em></small>
-        <form class="form-horizontal" action="{{ isset($dosen) ? $updateRoute : route('admin.dosen.store') }}" method="post">
+        <form class="form-horizontal" action="{{ route('dosen.profil.update', $dosen->id) }}" method="post">
             @csrf
             @method('PUT')
             <div class="row">

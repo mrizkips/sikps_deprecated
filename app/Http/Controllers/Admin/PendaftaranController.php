@@ -19,19 +19,19 @@ class PendaftaranController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $proposal = Pendaftaran::query();
-            return DataTables::eloquent($proposal)
+            $pendaftaran = Pendaftaran::query();
+            return DataTables::eloquent($pendaftaran)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $edit = view('components.edit', ['url' => route('admin.proposal.edit', $row->id)]);
-                    $destroy = view('components.delete', ['url' => route('admin.proposal.destroy', $row->id)]);
+                    $edit = view('components.edit', ['url' => route('admin.pendaftaran.edit', $row->id)]);
+                    $destroy = view('components.delete', ['url' => route('admin.pendaftaran.destroy', $row->id)]);
                     return $edit.$destroy;
 
                 })
                 ->rawColumns(['action'])
                 ->make();
         }
-        return view('admin.proposal.index');
+        return view('admin.pendaftaran.index');
     }
 
     /**
@@ -41,7 +41,7 @@ class PendaftaranController extends Controller
      */
     public function create()
     {
-        return view('admin.proposal.form');
+        return view('admin.pendaftaran.form');
     }
 
     /**
@@ -54,50 +54,50 @@ class PendaftaranController extends Controller
     {
         $fields = $request->all();
         if (Pendaftaran::create($fields)) {
-            return redirect()->route('admin.proposal.index')->with('flash_messages', [
+            return redirect()->route('admin.pendaftaran.index')->with('flash_messages', [
                 'type' => 'success',
-                'message' => trans('proposal.messages.success.create'),
+                'message' => trans('pendaftaran.messages.success.create'),
             ]);
         }
 
         return redirect()->back()->withInput()->with('flash_messages', [
             'type' => 'danger',
-            'message' => trans('proposal.messages.errors.create'),
+            'message' => trans('pendaftaran.messages.errors.create'),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pendaftaran  $proposal
+     * @param  \App\Models\Pendaftaran  $pendaftaran
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pendaftaran $proposal)
+    public function edit(Pendaftaran $pendaftaran)
     {
-        return view('admin.proposal.form', compact('proposal'));
+        return view('admin.pendaftaran.form', compact('pendaftaran'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\PendaftaranRequest $request
-     * @param  \App\Models\Pendaftaran $proposal
+     * @param  \App\Models\Pendaftaran $pendaftaran
      * @return \Illuminate\Http\Response
      */
-    public function update(PendaftaranRequest $request, Pendaftaran $proposal)
+    public function update(PendaftaranRequest $request, Pendaftaran $pendaftaran)
     {
         $fields = $request->all();
 
-        if ($proposal->update($fields)) {
-            return redirect()->route('admin.proposal.index')->with('flash_messages', [
+        if ($pendaftaran->update($fields)) {
+            return redirect()->route('admin.pendaftaran.index')->with('flash_messages', [
                 'type' => 'success',
-                'message' => trans('proposal.messages.success.update'),
+                'message' => trans('pendaftaran.messages.success.update'),
             ]);
         }
 
         return redirect()->back()->withInput()->with('flash_messages', [
             'type' => 'danger',
-            'message' => trans('proposal.messages.errors.update'),
+            'message' => trans('pendaftaran.messages.errors.update'),
         ]);
     }
 
@@ -109,14 +109,14 @@ class PendaftaranController extends Controller
      */
     public function destroy($id)
     {
-        if (!$proposal = Pendaftaran::find($id)) {
+        if (!$pendaftaran = Pendaftaran::find($id)) {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'danger',
                 'message' => trans('petugas.messages.errors.not_found'),
             ]);
         }
 
-        if($proposal->delete()) {
+        if($pendaftaran->delete()) {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'success',
                 'message' => trans('petugas.messages.success.delete'),

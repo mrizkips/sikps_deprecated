@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', "{$dosen->user->nama} - ".config('app.name'))
+@section('title', "Profil {$dosen->user->nama} - ".config('app.name'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">{{ $dosen->user->nama }}</li>
@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="fade-in">
-        <h3 class="mb-4"><strong><i class="cil-education">
+        <h3 class="mb-4"><strong><i class="cil-people">
             </i>&nbsp;Data</strong>&nbsp;<small>{{ $dosen->user->nama }}</small>
         </h3>
         <form>

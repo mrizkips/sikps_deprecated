@@ -7,9 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MahasiswaRequest;
 use App\Models\Mahasiswa;
 use App\Services\MahasiswaService;
-use Yajra\DataTables\Facades\DataTables;
 
-class MahasiswaController extends Controller
+class ProfilController extends Controller
 {
     /**
      * Display the specified resource.

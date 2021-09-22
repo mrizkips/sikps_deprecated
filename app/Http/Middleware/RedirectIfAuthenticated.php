@@ -23,6 +23,10 @@ class RedirectIfAuthenticated
             return redirect()->route('mahasiswa.beranda');
         } else if (Auth::guard('dosen')->check()) {
             return redirect()->route('dosen.beranda');
+        } else if (Auth::guard('baak')->check()) {
+            return redirect()->route('baak.beranda');
+        } else if (Auth::guard('keuangan')->check()) {
+            return redirect()->route('keuangan.beranda');
         }
 
         return $next($request);

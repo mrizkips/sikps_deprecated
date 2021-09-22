@@ -2,13 +2,26 @@
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('mahasiswa.beranda') }}">
         <i class="cil-speedometer c-sidebar-nav-icon"></i> Beranda</a>
     </li>
+    <li class="c-sidebar-nav-title">KP & Skripsi</li>
+    <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="cil-task c-sidebar-nav-icon"></i> Proposal</a>
+        <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.proposal.index') }}" class="c-sidebar-nav-link">
+                Daftar Proposal</a>
+            </li>
+            <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.proposal.create') }}" class="c-sidebar-nav-link">
+                Tambah Proposal</a>
+            </li>
+        </ul>
+    </li>
+    <li class="c-sidebar-nav-title">Data Pengguna</li>
     <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
         <i class="cil-people c-sidebar-nav-icon"></i> Profil</a>
         <ul class="c-sidebar-nav-dropdown-items">
-            <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.mahasiswa.show', Auth::user()->mahasiswa->id) }}" class="c-sidebar-nav-link">
+            <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.profil.show', Auth::user()->mahasiswa->id) }}" class="c-sidebar-nav-link">
                 Lihat Profil</a>
             </li>
-            <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.mahasiswa.edit', Auth::user()->mahasiswa->id) }}" class="c-sidebar-nav-link">
+            <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.profil.edit', Auth::user()->mahasiswa->id) }}" class="c-sidebar-nav-link">
                 Edit Profil</a>
             </li>
         </ul>

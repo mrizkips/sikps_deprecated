@@ -13,7 +13,7 @@
             </i>&nbsp;Form</strong>&nbsp;<small>Edit Profil</small>
         </h3>
         <small class="text-danger"><em>Isian bertanda (*) wajib diisi</em></small>
-        <form class="form-horizontal" action="{{ route('mahasiswa.mahasiswa.update', $mahasiswa->id) }}" method="post">
+        <form class="form-horizontal" action="{{ route('mahasiswa.profil.update', $mahasiswa->id) }}" method="post">
             @csrf
             @method('PUT')
             <div class="row">
