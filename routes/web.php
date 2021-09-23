@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'LandingPageController@index')->name('landingpage');
+Route::get('proposal', 'LandingPageController@proposal')->name('proposal.index');
 
 Auth::routes();
 

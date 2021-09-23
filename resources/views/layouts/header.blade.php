@@ -1,10 +1,15 @@
 <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
     <button class="c-header-toggler c-class-toggler d-lg-none mr-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show"><span class="c-header-toggler-icon"></span></button>
     <a class="c-header-brand d-md-none" href="{{
-    Auth::guard('admin')->check() ? route('admin.beranda') :
-    (Auth::guard('mahasiswa')->check() ? route('mahasiswa.beranda') :
-    (Auth::guard('dosen')-> check() ? route('dosen.beranda') : route('landingpage')))
-    }}">
+        Auth::guard('admin')->check() ? route('admin.beranda') :
+            (Auth::guard('mahasiswa')->check() ? route('mahasiswa.beranda') :
+                (Auth::guard('dosen')-> check() ? route('dosen.beranda') :
+                    (Auth::guard('keuangan')-> check() ? route('keuangan.beranda') :
+                        (Auth::guard('baak')-> check() ? route('baak.beranda') : route('landingpage'))
+                    )
+                )
+            )
+        }}">
         <img class="c-header-brand " src="{{ asset('assets/img/stmik-logo.png') }}" height="46">
     </a>
     <button class="c-header-toggler c-class-toggler ml-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true"><span class="c-header-toggler-icon"></span></button>
@@ -25,8 +30,13 @@
         <ol class="breadcrumb border-0 m-0">
             <li class="breadcrumb-item"><a href="{{
                 Auth::guard('admin')->check() ? route('admin.beranda') :
-                (Auth::guard('mahasiswa')->check() ? route('mahasiswa.beranda') :
-                (Auth::guard('dosen')-> check() ? route('dosen.beranda') : route('landingpage')))
+                    (Auth::guard('mahasiswa')->check() ? route('mahasiswa.beranda') :
+                        (Auth::guard('dosen')-> check() ? route('dosen.beranda') :
+                            (Auth::guard('keuangan')-> check() ? route('keuangan.beranda') :
+                                (Auth::guard('baak')-> check() ? route('baak.beranda') : route('landingpage'))
+                            )
+                        )
+                    )
                 }}">Beranda</a></li>
             @yield('breadcrumbs')
         </ol>

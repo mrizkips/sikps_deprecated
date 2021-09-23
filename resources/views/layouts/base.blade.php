@@ -44,8 +44,10 @@
 <body class="c-app">
     <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
         <div class="c-sidebar-brand">
-            <img class="c-sidebar-brand-full" src="{{ asset('assets/img/stmik-logo.png') }}" height="46">
-            <img class="c-sidebar-brand-minimized" src="{{ asset('assets/img/stmik-logo.png') }}" height="24">
+            <a href="{{ route('landingpage') }}">
+                <img class="c-sidebar-brand-full" src="{{ asset('assets/img/stmik-logo.png') }}" height="46">
+                <img class="c-sidebar-brand-minimized" src="{{ asset('assets/img/stmik-logo.png') }}" height="24">
+            </a>
         </div>
         @include('layouts.sidebar')
         <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>

@@ -59,7 +59,7 @@ class ProposalController extends Controller
     public function create()
     {
         $kbb = Kbb::all();
-        $pendaftaran = getPendaftaranValid();
+        $pendaftaran = Pendaftaran::proposal()->active()->get();
         return view('mahasiswa.proposal.form', compact('kbb', 'pendaftaran'));
     }
 
@@ -127,7 +127,7 @@ class ProposalController extends Controller
     public function edit(Proposal $proposal)
     {
         $kbb = Kbb::all();
-        $pendaftaran = getPendaftaranValid();
+        $pendaftaran = Pendaftaran::proposal()->active()->get();
         return view('mahasiswa.proposal.form', compact('kbb', 'pendaftaran', 'proposal'));
     }
 

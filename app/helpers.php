@@ -39,14 +39,3 @@ if (!function_exists('is_array_empty')) {
         }
     }
 }
-
-if (!function_exists('getPendaftaranValid')) {
-    function getPendaftaranValid()
-    {
-        $pendaftaran = Pendaftaran::where([
-            ['awal', '<=', now()],
-            ['akhir', '>=', now()]
-        ])->get();
-        return $pendaftaran;
-    }
-}

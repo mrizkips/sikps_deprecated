@@ -11,6 +11,7 @@
 
 
   <title>Home</title>
+  <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/web/assets/mobirise-icons2/mobirise2.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/web/assets/mobirise-icons-bold/mobirise-icons-bold.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/tether/tether.min.css')}}">
@@ -21,7 +22,6 @@
   <link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/socicon/css/styles.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/theme/css/style.css') }}">
   <link rel="preload" as="style" href="{{ asset('assets/vendor/landingpage/mobirise/css/mbr-additional.css') }}"><link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/mobirise/css/mbr-additional.css') }}" type="text/css">
-
 
 
 
@@ -39,7 +39,7 @@
                         <img src="{{ asset('assets/vendor/landingpage/images/stmik-logo.png') }}" alt="SIKPS" style="height: 3rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7" href="#">SIKPS</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7" href="{{ route('landingpage') }}">SIKPS</a></span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
@@ -54,13 +54,18 @@
                     @auth
                     <li class="nav-item"><a class="nav-link link text-black display-4" href="{{
                         Auth::guard('admin')->check() ? route('admin.beranda') :
-                        (Auth::guard('mahasiswa')->check() ? route('mahasiswa.beranda') :
-                        (Auth::guard('dosen')-> check() ? route('dosen.beranda') : route('landingpage')))
+                            (Auth::guard('mahasiswa')->check() ? route('mahasiswa.beranda') :
+                                (Auth::guard('dosen')-> check() ? route('dosen.beranda') :
+                                    (Auth::guard('keuangan')-> check() ? route('keuangan.beranda') :
+                                        (Auth::guard('baak')-> check() ? route('baak.beranda') : route('landingpage'))
+                                    )
+                                )
+                            )
                         }}">
                         Beranda</a></li>
                     @endauth
-                    <li class="nav-item"><a class="nav-link link text-black display-4" href="#">
-                        Daftar Proposal</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black display-4" href="#proposal">
+                        List Proposal</a></li>
                     @guest
                     <li class="nav-item"><a class="nav-link link text-black display-4" href="{{ route('login') }}">
                         Login</a></li>
@@ -181,6 +186,44 @@
     </div>
 </section>
 
+<section class="content15 cid-st0RBapJdg" id="proposal">
+
+
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card-wrapper pb-4 display-4">
+                    <div class="card-box align-center">
+                        <h4 class="card-title mbr-fonts-style mb-4 display-2">
+                            <strong>List Proposal</strong></h4>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table mbr-black mbr-fonts-style" id="dataTable">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Judul</td>
+                                <td>Jenis</td>
+                                <td>Nama Mahasiswa</td>
+                                <td>KBB</td>
+                                <td>Status</td>
+                                <td>Dosen Pembimbing</td>
+                                <td>Tanggal Dibuat</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="team2 cid-st0SpdgVGH" xmlns="http://www.w3.org/1999/html" id="team2-5">
 
 
@@ -253,6 +296,37 @@
 <script src="{{ asset('assets/vendor/landingpage/dropdown/js/navbar-dropdown.js') }}"></script>
 <script src="{{ asset('assets/vendor/landingpage/touchswipe/jquery.touch-swipe.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/landingpage/theme/js/script.js') }}"></script>
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        var table = $('#dataTable').DataTable({
+            language: {
+                url: '{{ asset('js/dataTables.indonesian.json') }}'
+            },
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('proposal.index') }}",
+            columns: [
+                {data: 'DT_RowIndex', orderable: false, searchable: false},
+                {data: 'judul', name: 'judul'},
+                {data: 'jenis', name: 'jenis'},
+                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama', orderable: false},
+                {data: 'kbb.nama', name: 'kbb.nama', orderable: false},
+                {data: 'tipe', name: 'tipe', searchable: false, orderable:false},
+                {data: 'dosen', name: 'dosen', searchable: false, orderable:false, render: function(data, type) {
+                    if (data === null) {
+                        return "-"
+                    }
+                    return data.user.nama
+                }},
+                {data: 'created_at', name: 'created_at'},
+            ],
+            order: ['7', 'desc']
+        });
+    });
+</script>
 
 
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>

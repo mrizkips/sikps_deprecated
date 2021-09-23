@@ -21,4 +21,40 @@ class Pendaftaran extends Model
     protected $fillable = [
         'judul', 'jenis', 'awal', 'akhir',
     ];
+
+    /**
+     * Scope query untuk pendaftaran yang aktif.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where([
+            ['awal', '<=', now()],
+            ['akhir', '>=', now()]
+        ]);
+    }
+
+    /**
+     * Scope query untuk pendaftaran proposal.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeProposal($query)
+    {
+        return $query->where('jenis', 'Proposal');
+    }
+
+    /**
+     * Scope query untuk pendaftaran sidang.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSidang($query)
+    {
+        return $query->where('jenis', 'Sidang');
+    }
 }
