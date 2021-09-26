@@ -17,12 +17,10 @@ class CreateProposalTable extends Migration
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->string('judul', 150);
-            $table->enum('jenis', ['Skripsi', 'Kerja Praktek']);
+            $table->enum('jenis', ['1', '2'])->comment('1 => Skripsi, 2 => Kerja Praktek');
             $table->unsignedBigInteger('mahasiswa_id');
             $table->string('dokumen', 150);
             $table->unsignedBigInteger('pendaftaran_id');
-            $table->unsignedSmallInteger('kbb_id');
-            $table->date('tanggal_kontrak');
             $table->unsignedBigInteger('dosen_id')->nullable();
             $table->timestamps();
 
@@ -33,11 +31,6 @@ class CreateProposalTable extends Migration
 
             $table->foreign('pendaftaran_id')
                 ->references('id')->on('pendaftaran')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('kbb_id')
-                ->references('id')->on('kbb')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

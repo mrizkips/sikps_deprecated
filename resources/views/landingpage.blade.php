@@ -65,7 +65,7 @@
                         Beranda</a></li>
                     @endauth
                     <li class="nav-item"><a class="nav-link link text-black display-4" href="#proposal">
-                        List Proposal</a></li>
+                        Daftar Proposal</a></li>
                     @guest
                     <li class="nav-item"><a class="nav-link link text-black display-4" href="{{ route('login') }}">
                         Login</a></li>
@@ -116,7 +116,7 @@
                         <h4 class="card-title mbr-fonts-style mbr-white mb-3 display-5"><strong>Tentang Kami</strong></h4>
                         <p class="mbr-text mbr-fonts-style display-7">STMIK Bandung merupakan STMIK pertama di Jawa Barat dan pelopor pendidikan tinggi informatika swasta dengan fokus untuk mencetak tenaga profesional dan technopreneur IT.
 <br>
-<br>Dalam upaya memberikan kesempatan kepada masyarakat yang tidak mempunyai waktu luang mengikuti pendidikan di hari kerja. STMIK BANDUNG membuka Program Kelas Karyawan atau Program Kuliah Karyawan dan Eksekutif jenjang S1.<br><br>Sistem Informasi Kerja Praktek dan Skripsi ini adalah pengembangan dari Sistem Informasi Pengajuan Proposal yang dibuat oleh Kafi Rohman dengan melengkapi fitur-fitur yang kurang dan memperbaiki fitur-fitur yang tidak berjalan.</p>
+<br>Dalam upaya memberikan kesempatan kepada masyarakat yang tidak mempunyai waktu luang mengikuti pendidikan di hari kerja. STMIK BANDUNG membuka Program Kelas Karyawan atau Program Kuliah Karyawan dan Eksekutif jenjang S1.<br><br>Sistem Informasi Kerja Praktek dan Skripsi ini adalah pengembangan dari Sistem Informasi Pengajuan Proposal yang dibuat oleh Mahasiswa STMIK Bandung dengan melengkapi fitur-fitur yang kurang dan memperbaiki fitur-fitur yang tidak berjalan.</p>
 
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                 <div class="card-wrapper pb-4 display-4">
                     <div class="card-box align-center">
                         <h4 class="card-title mbr-fonts-style mb-4 display-2">
-                            <strong>List Proposal</strong></h4>
+                            <strong>Daftar Proposal</strong></h4>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -208,7 +208,6 @@
                                 <td>Judul</td>
                                 <td>Jenis</td>
                                 <td>Nama Mahasiswa</td>
-                                <td>KBB</td>
                                 <td>Status</td>
                                 <td>Dosen Pembimbing</td>
                                 <td>Tanggal Dibuat</td>
@@ -312,18 +311,12 @@
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
                 {data: 'judul', name: 'judul'},
                 {data: 'jenis', name: 'jenis'},
-                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama', orderable: false},
-                {data: 'kbb.nama', name: 'kbb.nama', orderable: false},
-                {data: 'tipe', name: 'tipe', searchable: false, orderable:false},
-                {data: 'dosen', name: 'dosen', searchable: false, orderable:false, render: function(data, type) {
-                    if (data === null) {
-                        return "-"
-                    }
-                    return data.user.nama
-                }},
+                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama'},
+                {data: 'tipe', name: 'tipe', searchable: false, orderable: false},
+                {data: 'dosen.user.nama', name: 'dosen.user.nama'},
                 {data: 'created_at', name: 'created_at'},
             ],
-            order: ['7', 'desc']
+            order: ['6', 'desc']
         });
     });
 </script>

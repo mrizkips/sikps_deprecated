@@ -26,9 +26,10 @@ class PendaftaranRequest extends FormRequest
     {
         return [
             'judul' => 'required|string',
-            'jenis' => 'required|in:Proposal,Sidang',
+            'jenis' => 'required|in:1,2',
             'awal' => 'required|date',
             'akhir' => 'required|date|after_or_equal:awal',
+            'tanggal_kontrak' => 'required|date',
         ];
     }
 
@@ -44,6 +45,7 @@ class PendaftaranRequest extends FormRequest
             'jenis' => trans('pendaftaran.fields.jenis'),
             'awal' => trans('pendaftaran.fields.awal'),
             'akhir' => trans('pendaftaran.fields.akhir'),
+            'tanggal_kontrak' => trans('pendaftaran.fields.tanggal_kontrak'),
         ];
     }
 }

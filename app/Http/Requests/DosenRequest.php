@@ -30,6 +30,7 @@ class DosenRequest extends FormRequest
             'nidn' => 'required',
             'no_hp' => 'required|alpha_num',
             'jen_kel' => 'required|in:Laki-laki,Perempuan',
+            'keahlian' => 'nullable|string',
         ];
     }
 
@@ -46,6 +47,7 @@ class DosenRequest extends FormRequest
             'nidn' => trans('dosen.fields.nidn'),
             'no_hp' => trans('dosen.fields.no_hp'),
             'jen_kel' => trans('dosen.fields.jen_kel'),
+            'keahlian' => trans('dosen.fields.keahlian'),
             'password' => trans('dosen.fields.password'),
         ];
     }

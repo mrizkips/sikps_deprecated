@@ -16,7 +16,7 @@ class CreateTableApprovals extends Migration
         Schema::create('approvals', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->enum('tipe', ['Menunggu', 'Disetujui', 'Ditolak']);
+            $table->enum('tipe', ['0', '1', '2'])->comment('0 => Menunggu, 1 => Disetujui, 2 => Ditolak');
             $table->text('catatan')->nullable();
             $table->unsignedTinyInteger('role_id');
             $table->unsignedBigInteger('status_id');

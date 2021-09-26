@@ -7,18 +7,18 @@ return [
     ],
 
     'jenis_pendaftaran' => [
-        'Proposal',
-        'Sidang'
+        '1' => 'Proposal',
+        '2' => 'Sidang'
     ],
 
     'status' => [
-        'Menunggu',
-        'Disetujui',
-        'Ditolak'
+        '0' => 'Menunggu',
+        '1' => 'Disetujui',
+        '2' => 'Ditolak',
     ],
 
     'jenis_proposal' => [
-        'Skripsi',
-        'Kerja Praktek'
+        '1' => 'Skripsi',
+        '2' => 'Kerja Praktek'
     ],
 ];

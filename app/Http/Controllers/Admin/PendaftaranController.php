@@ -22,6 +22,9 @@ class PendaftaranController extends Controller
             $pendaftaran = Pendaftaran::query();
             return DataTables::eloquent($pendaftaran)
                 ->addIndexColumn()
+                ->editColumn('jenis', function($row){
+                    return ($row->jenis == '1' ? 'Proposal' : 'Sidang');
+                })
                 ->addColumn('action', function($row) {
                     $edit = view('components.edit', ['url' => route('admin.pendaftaran.edit', $row->id)]);
                     $destroy = view('components.delete', ['url' => route('admin.pendaftaran.destroy', $row->id)]);

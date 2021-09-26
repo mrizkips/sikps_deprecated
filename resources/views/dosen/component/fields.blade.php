@@ -67,6 +67,19 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="keahlian" class="col-md-3 col-form-label">Keahlian</label>
+    <div class="col-md">
+        @include('components.input', [
+            'type' => 'text',
+            'name' => 'keahlian',
+            'value' => isset($dosen) ? $dosen->keahlian : old('keahlian'),
+            'required' => false,
+            'autofocus' => false,
+            'placeholder' => trans('dosen.placeholders.keahlian'),
+        ])
+    </div>
+</div>
+<div class="form-group row">
     <label for="password" class="col-md-3 col-form-label">Password*</label>
     <div class="col-md">
         @include('components.input', [

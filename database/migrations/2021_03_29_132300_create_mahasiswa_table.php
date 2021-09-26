@@ -18,6 +18,9 @@ class CreateMahasiswaTable extends Migration
             $table->bigIncrements('id');
             $table->string('nim', 7)->unique();
             $table->unsignedBigInteger('user_id');
+            $table->string('tempat_lahir', 60);
+            $table->date('tanggal_lahir');
+            $table->text('alamat');
             $table->char('no_hp', 13);
             $table->enum('jen_kel', ['Laki-laki', 'Perempuan']);
             $table->timestamps();

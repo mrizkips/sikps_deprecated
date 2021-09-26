@@ -16,7 +16,7 @@ class CreateTableStatus extends Migration
         Schema::create('status', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->enum('tipe', ['Menunggu', 'Disetujui', 'Ditolak']);
+            $table->enum('tipe', ['0', '1', '2'])->comment('0 => Menunggu, 1 => Disetujui, 2 => Ditolak');
             $table->unsignedBigInteger('statusable_id');
             $table->string('statusable_type', 60);
             $table->timestamps();

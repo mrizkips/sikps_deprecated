@@ -16,8 +16,8 @@
     <div class="col-md">
         <select name="jenis" id="jenis" class="form-control @error('jenis') is-invalid @enderror">
             <option>{{ trans('pendaftaran.placeholders.jenis') }}</option>
-            @foreach (config('constant.jenis_pendaftaran') as $item)
-                <option value="{{ $item }}" {{ isset($pendaftaran) ? ($pendaftaran->jenis == $item ? 'selected' : '') : '' }}>{{ $item }}</option>
+            @foreach (config('constant.jenis_pendaftaran') as $key => $value)
+                <option value="{{ $key }}" {{ isset($pendaftaran) ? ($pendaftaran->jenis == $key ? 'selected' : '') : '' }}>{{ $value }}</option>
             @endforeach
         </select>
         @error('jenis')
@@ -50,6 +50,19 @@
             'required' => false,
             'autofocus' => false,
             'placeholder' => trans('pendaftaran.placeholders.akhir'),
+        ])
+    </div>
+</div>
+<div class="form-group row">
+    <label for="tanggal_kontrak" class="col-md-3 col-form-label">Tanggal Kontrak*</label>
+    <div class="col-md">
+        @include('components.input', [
+            'type' => 'date',
+            'name' => 'tanggal_kontrak',
+            'value' => isset($pendaftaran) ? $pendaftaran->tanggal_kontrak : old('tanggal_kontrak'),
+            'required' => false,
+            'autofocus' => false,
+            'placeholder' => trans('pendaftaran.placeholders.tanggal_kontrak'),
         ])
     </div>
 </div>

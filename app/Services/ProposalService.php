@@ -20,13 +20,18 @@ class ProposalService
     {
         DB::beginTransaction();
         try {
+            # Tempat KP
+            if ($data['jenis'] == 1) {
+                $data['tempat_kp'] = null;
+            }
+
             # Buat Proposal
             $proposal = new Proposal();
             $proposal->fill($data);
             throw_unless($proposal->save(), new Exception());
 
             # Buat Status
-            $status = ['tipe' => 'menunggu'];
+            $status = ['tipe' => '0'];
             throw_unless($proposal->status()->create($status), new Exception());
 
             # Buat Approval
@@ -67,6 +72,11 @@ class ProposalService
     {
         DB::beginTransaction();
         try {
+            # Tempat KP
+            if (isset($data['jenis']) && $data['jenis'] == 1) {
+                $data['tempat_kp'] = null;
+            }
+
             $proposal->fill($data);
             $commit = $proposal->update();
             DB::commit();
@@ -126,29 +136,29 @@ class ProposalService
             $waiting = 0;
             $list_approval = Approval::where('status_id', $status->id)->get();
             foreach ($list_approval as $list) {
-                if ($list->tipe == "Ditolak") {
+                if ($list->tipe == "2") {
                     $denied += 1;
-                } else if ($list->tipe == "Menunggu") {
+                } else if ($list->tipe == "0") {
                     $waiting += 1;
                 }
             }
 
             # Set waiting status
             if ($waiting > 0) {
-                $status->tipe = "Menunggu";
+                $status->tipe = "0";
                 $commit = $status->update();
             }
 
 
             # Set disapproved status
             if ($denied > 0) {
-                $status->tipe = "Ditolak";
+                $status->tipe = "2";
                 $commit = $status->update();
             }
 
             # Set approved status
             if ($denied == 0 && $waiting == 0) {
-                $status->tipe = "Disetujui";
+                $status->tipe = "1";
                 $commit = $status->update();
             }
 

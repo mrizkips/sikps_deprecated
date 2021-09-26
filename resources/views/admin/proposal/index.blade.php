@@ -27,7 +27,6 @@
                                             <td>Judul</td>
                                             <td>Jenis</td>
                                             <td>Nama Mahasiswa</td>
-                                            <td>KBB</td>
                                             <td>Status</td>
                                             <td>Dosen Pembimbing</td>
                                             <td>Tanggal Dibuat</td>
@@ -61,19 +60,13 @@
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
                 {data: 'judul', name: 'judul'},
                 {data: 'jenis', name: 'jenis'},
-                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama', orderable: false},
-                {data: 'kbb.nama', name: 'kbb.nama', orderable: false},
+                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama'},
                 {data: 'tipe', name: 'tipe', searchable: false, orderable:false},
-                {data: 'dosen', name: 'dosen', searchable: false, orderable:false, render: function(data, type) {
-                    if (data === null) {
-                        return "-"
-                    }
-                    return data.user.nama
-                }},
+                {data: 'dosen.user.nama', name: 'dosen.user.nama'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', searchable: false, orderable: false}
             ],
-            order: ['7', 'desc']
+            order: ['6', 'desc']
         });
     });
 </script>

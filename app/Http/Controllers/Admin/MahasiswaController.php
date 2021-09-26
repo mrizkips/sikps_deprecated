@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MahasiswaRequest;
+use App\Models\Jurusan;
+use App\Models\Kbb;
 use App\Models\Mahasiswa;
 use App\Services\MahasiswaService;
 use Yajra\DataTables\Facades\DataTables;
@@ -54,7 +56,9 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        return view('admin.mahasiswa.form', compact('mahasiswa'));
+        $kbb = Kbb::all();
+        $jurusan = Jurusan::all();
+        return view('admin.mahasiswa.form', compact('mahasiswa', 'kbb', 'jurusan'));
     }
 
     /**

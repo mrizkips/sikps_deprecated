@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     @csrf
                     @method('POST')
-                    <input type="hidden" value="Disetujui" name="tipe">
+                    <input type="hidden" value="1" name="tipe">
                     <textarea name="catatan" id="catatan" class="form-control" placeholder="Catatan.. (Tidak wajib diisi)"></textarea>
                 </div>
                 <div class="modal-footer">

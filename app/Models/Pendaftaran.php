@@ -19,7 +19,7 @@ class Pendaftaran extends Model
      * @var array
      */
     protected $fillable = [
-        'judul', 'jenis', 'awal', 'akhir',
+        'judul', 'jenis', 'awal', 'akhir', 'tanggal_kontrak',
     ];
 
     /**
@@ -31,8 +31,8 @@ class Pendaftaran extends Model
     public function scopeActive($query)
     {
         return $query->where([
-            ['awal', '<=', now()],
-            ['akhir', '>=', now()]
+            ['awal', '<=', today()],
+            ['akhir', '>=', today()]
         ]);
     }
 
@@ -44,7 +44,7 @@ class Pendaftaran extends Model
      */
     public function scopeProposal($query)
     {
-        return $query->where('jenis', 'Proposal');
+        return $query->where('jenis', '1');
     }
 
     /**
@@ -55,6 +55,6 @@ class Pendaftaran extends Model
      */
     public function scopeSidang($query)
     {
-        return $query->where('jenis', 'Sidang');
+        return $query->where('jenis', '2');
     }
 }

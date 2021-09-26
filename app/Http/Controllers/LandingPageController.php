@@ -25,9 +25,10 @@ class LandingPageController extends Controller
     public function proposal(Request $request)
     {
         if ($request->ajax()) {
-            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user', 'kbb']);
+            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*');
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
+                ->editColumn('jenis', 'proposal.component.jenis')
                 ->addColumn('tipe', function($row) {
                     $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
                     return $badge;

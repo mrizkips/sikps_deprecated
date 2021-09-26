@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class MahasiswaRequest extends FormRequest
 {
@@ -29,7 +30,12 @@ class MahasiswaRequest extends FormRequest
             'email' => 'required|email',
             'nim' => 'required',
             'no_hp' => 'required|alpha_num',
-            'jen_kel' => 'required|in:Laki-laki,Perempuan',
+            'kbb_id' => 'required|exists:kbb,id',
+            'jurusan_id' => 'required|exists:jurusan,id',
+            'jen_kel' => ['required', Rule::in(config('constant.jen_kel'))],
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string',
         ];
     }
 
@@ -45,7 +51,12 @@ class MahasiswaRequest extends FormRequest
             'email' => trans('mahasiswa.fields.email'),
             'nim' => trans('mahasiswa.fields.nim'),
             'no_hp' => trans('mahasiswa.fields.no_hp'),
+            'kbb_id' => trans('mahasiswa.fields.kbb_id'),
+            'jurusan_id' => trans('mahasiswa.fields.jurusan_id'),
             'jen_kel' => trans('mahasiswa.fields.jen_kel'),
+            'tempat_lahir' => trans('mahasiswa.fields.tempat_lahir'),
+            'tanggal_lahir' => trans('mahasiswa.fields.tanggal_lahir'),
+            'alamat' => trans('mahasiswa.fields.alamat'),
             'password' => trans('mahasiswa.fields.password'),
         ];
     }

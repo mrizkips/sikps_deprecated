@@ -1,1 +1,1 @@
-<div class="badge bg-{{ $status == 'Menunggu' ? 'secondary' : ($status == 'Disetujui' ? 'success text-white' : 'danger text-white') }}">{{ $status }}</div>
+<div class="badge bg-{{ $status == '0' ? 'secondary' : ($status == '1' ? 'success text-white' : 'danger text-white') }}">{{ config('constant.status')[$status] }}</div>

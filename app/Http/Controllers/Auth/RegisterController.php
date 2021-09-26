@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Jurusan;
+use App\Models\Kbb;
 use App\Services\MahasiswaService;
-use Exception;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
@@ -47,6 +44,18 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $kbb = Kbb::all();
+        $jurusan = Jurusan::all();
+        return view('auth.register', compact('kbb', 'jurusan'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -58,7 +67,13 @@ class RegisterController extends Controller
             'nama' => ['required', 'string', 'max:60'],
             'email' => ['required', 'string', 'email', 'max:60', 'unique:users'],
             'nim' => ['required', 'numeric', 'digits:7', 'unique:mahasiswa'],
+            'kbb_id' => ['required', 'exists:kbb,id'],
+            'jurusan_id' => ['required', 'exists:jurusan,id'],
             'jen_kel' => ['required', Rule::in(config('constant.jen_kel'))],
+            'no_hp' => ['required', 'alpha_num', 'max:13'],
+            'tempat_lahir' => ['required', 'string'],
+            'tanggal_lahir' => ['required', 'date'],
+            'alamat' => ['required', 'string'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ], [], trans('login.attributes'));
     }

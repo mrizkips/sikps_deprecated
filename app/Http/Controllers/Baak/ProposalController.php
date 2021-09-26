@@ -19,9 +19,10 @@ class ProposalController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user', 'kbb']);
+            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*');
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
+                ->editColumn('jenis', 'proposal.component.jenis')
                 ->addColumn('tipe', function($row) {
                     $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
                     return $badge;
@@ -61,10 +62,10 @@ class ProposalController extends Controller
     {
         $fields = $request->all();
 
-        if ($request->tipe == "Disetujui") {
+        if ($request->tipe == "1") {
             $success = trans('proposal.messages.success.approve');
             $error = trans('proposal.messages.errors.approve');
-        } else {
+        } else if ($request->tipe == "2") {
             $success = trans('proposal.messages.success.disapprove');
             $error = trans('proposal.messages.errors.disapprove');
         }

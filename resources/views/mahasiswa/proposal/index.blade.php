@@ -63,12 +63,7 @@
                 {data: 'judul', name: 'judul'},
                 {data: 'jenis', name: 'jenis'},
                 {data: 'tipe', name: 'tipe', searchable: false, orderable:false},
-                {data: 'dosen', name: 'dosen', searchable: false, orderable:false, render: function(data, type) {
-                    if (data === null) {
-                        return "-"
-                    }
-                    return data.user.nama
-                }},
+                {data: 'dosen.user.nama', name: 'dosen.user.nama'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', 'searchable': false, orderable: false}
             ],

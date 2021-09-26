@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.proposal.index') }}" class="btn btn-secondary"><i class="cil-arrow-thick-left"></i> Kembali</a>
                         <button type="button" class="btn btn-outline-danger float-right" title="Tolak" data-toggle="modal" data-target="#disapproveModal"><i class="cil-ban"></i></button>
                         <button type="button" class="btn btn-outline-success float-right mr-1" title="Setuju" data-toggle="modal" data-target="#approveModal"><i class="cil-check"></i></button>
-                        @if ($proposal->status->tipe == "Disetujui")
+                        @if ($proposal->status->tipe == "1")
                             <button type="button" class="btn btn-outline-primary float-right mr-1" title="Tentukan Dosen" data-toggle="modal" data-target="#assignModal"><i class="cil-education"></i></button>
                         @endif
                     </div>
@@ -45,7 +45,7 @@
                 <div class="modal-body">
                     @csrf
                     @method('POST')
-                    <input type="hidden" value="Ditolak" name="tipe">
+                    <input type="hidden" value="2" name="tipe">
                     <textarea name="catatan" id="catatan" class="form-control" placeholder="Catatan.. (Tidak wajib diisi)"></textarea>
                 </div>
                 <div class="modal-footer">
@@ -69,7 +69,7 @@
                 <div class="modal-body">
                     @csrf
                     @method('POST')
-                    <input type="hidden" value="Disetujui" name="tipe">
+                    <input type="hidden" value="1" name="tipe">
                     <textarea name="catatan" id="catatan" class="form-control" placeholder="Catatan.. (Tidak wajib diisi)"></textarea>
                 </div>
                 <div class="modal-footer">
@@ -83,7 +83,7 @@
 <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="assignModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{ $url }}" method="post" onsubmit="return confirm('Apakah Anda yakin akan melakukan aksi ini?');">
+            <form action="{{ route('admin.proposal.assign', $proposal->id) }}" method="post" onsubmit="return confirm('Apakah Anda yakin akan melakukan aksi ini?');">
                 <div class="modal-header">
                     <h5 class="modal-title" id="assignModalLabel">Menentukan Dosen Pembimbing</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

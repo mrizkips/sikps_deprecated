@@ -64,6 +64,46 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
+                                                <i class="cil-location-pin"></i>
+                                            </span>
+                                        </div>
+                                        <select name="kbb_id" id="kbb_id" class="form-control @error('kbb_id') is-invalid @enderror" required>
+                                            <option>{{ trans('login.placeholders.kbb_id') }}</option>
+                                            @foreach ($kbb as $item)
+                                                <option value="{{ $item->id }}" {{ old('kbb_id') == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kbb_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="cil-star"></i>
+                                            </span>
+                                        </div>
+                                        <select name="jurusan_id" id="jurusan_id" class="form-control @error('jurusan_id') is-invalid @enderror" required>
+                                            <option>{{ trans('login.placeholders.jurusan_id') }}</option>
+                                            @foreach ($jurusan as $item)
+                                                <option value="{{ $item->id }}" {{ old('jurusan_id') == $item->id ? 'selected' : ''}}>{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('jurusan_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
                                                 <i class="cil-people"></i>
                                             </span>
                                         </div>
@@ -74,6 +114,66 @@
                                             @endforeach
                                         </select>
                                         @error('jen_kel')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="cil-location-pin"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control @error('tempat_lahir') is-invalid @enderror" type="text" placeholder="{{ trans('login.placeholders.tempat_lahir') }}" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
+                                        @error('tempat_lahir')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="cil-calendar"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control @error('tanggal_lahir') is-invalid @enderror" type="date" placeholder="{{ trans('login.placeholders.tanggal_lahir') }}" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
+                                        @error('tanggal_lahir')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="cil-phone"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control @error('no_hp') is-invalid @enderror" type="tel" placeholder="{{ trans('login.placeholders.no_hp') }}" name="no_hp" value="{{ old('no_hp') }}" required>
+                                        @error('no_hp')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="cil-address-book"></i>
+                                            </span>
+                                        </div>
+                                        <textarea class="form-control @error('alamat') is-invalid @enderror" type="text" placeholder="{{ trans('login.placeholders.alamat') }}" name="alamat" required>{{ old('alamat') }}</textarea>
+                                        @error('alamat')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -104,21 +204,6 @@
                                         </div>
                                         <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password" placeholder="{{ trans('login.placeholders.password_confirmation') }}" name="password_confirmation" required>
                                         @error('password_confirmation')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="cil-phone"></i>
-                                            </span>
-                                        </div>
-                                        <input class="form-control @error('no_hp') is-invalid @enderror" type="tel" placeholder="{{ trans('login.placeholders.no_hp') }}" name="no_hp" value="{{ old('no_hp') }}" required>
-                                        @error('no_hp')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

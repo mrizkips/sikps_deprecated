@@ -19,7 +19,7 @@ class Dosen extends Model
      * @var array
      */
     protected $fillable = [
-        'nidn', 'user_id', 'no_hp', 'jen_kel',
+        'nidn', 'user_id', 'no_hp', 'jen_kel', 'keahlian',
     ];
 
     /**
@@ -29,6 +29,6 @@ class Dosen extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id')->withDefault(['nama' => '-']);
     }
 }

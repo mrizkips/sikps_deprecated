@@ -16,8 +16,8 @@
     <div class="col-md">
         <select name="jenis" id="jenis" class="form-control @error('jenis') is-invalid @enderror">
             <option>{{ trans('proposal.placeholders.jenis') }}</option>
-            @foreach (config('constant.jenis_proposal') as $item)
-                <option value="{{ $item }}" {{ isset($proposal) ? ($proposal->jenis == $item ? 'selected' : '') : '' }}>{{ $item }}</option>
+            @foreach (config('constant.jenis_proposal') as $key => $value)
+                <option value="{{ $key }}" {{ isset($proposal) ? ($proposal->jenis == $key ? 'selected' : (old('jenis') == $key ? 'selected' : '')) : '' }}>{{ $value }}</option>
             @endforeach
         </select>
         @error('jenis')
@@ -38,7 +38,7 @@
             'autofocus' => true,
             'placeholder' => trans('proposal.placeholders.dokumen'),
         ])
-        <small class="form-text text-muted" id="dokumen">
+        <small class="form-text text-muted" for="dokumen">
             Format file berupa pdf, maks. 2MB.
         </small>
     </div>
@@ -49,7 +49,7 @@
         <select name="pendaftaran_id" id="pendaftaran_id" class="form-control @error('pendaftaran_id') is-invalid @enderror">
             <option>{{ trans('proposal.placeholders.pendaftaran_id') }}</option>
             @foreach ($pendaftaran as $item)
-                <option value="{{ $item->id }}" {{ isset($proposal) ? ($proposal->pendaftaran_id == $item->id ? 'selected' : '') : '' }}>{{ $item->judul }}</option>
+                <option value="{{ $item->id }}" {{ isset($proposal) ? ($proposal->pendaftaran_id == $item->id ? 'selected' : (old('pendaftaran_id') == $item->id ? 'selected' : '')) : '' }}>{{ $item->judul }}</option>
             @endforeach
         </select>
         @error('pendaftaran_id')
@@ -60,31 +60,18 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="kbb_id" class="col-md-3 col-form-label">KBB*</label>
-    <div class="col-md">
-        <select name="kbb_id" id="kbb_id" class="form-control @error('kbb_id') is-invalid @enderror">
-            <option>{{ trans('proposal.placeholders.kbb_id') }}</option>
-            @foreach ($kbb as $item)
-                <option value="{{ $item->id }}" {{ isset($proposal) ? ($proposal->kbb_id == $item->id ? 'selected' : '') : '' }}>{{ $item->nama }}</option>
-            @endforeach
-        </select>
-        @error('kbb_id')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
-</div>
-<div class="form-group row">
-    <label for="tanggal_kontrak" class="col-md-3 col-form-label">Tanggal Kontrak*</label>
+    <label for="tempat_kp" class="col-md-3 col-form-label">Tempat KP*</label>
     <div class="col-md">
         @include('components.input', [
-            'type' => 'date',
-            'name' => 'tanggal_kontrak',
-            'value' => isset($proposal) ? $proposal->tanggal_kontrak : old('tanggal_kontrak'),
+            'type' => 'text',
+            'name' => 'tempat_kp',
+            'value' => isset($proposal) ? $proposal->tempat_kp : old('tempat_kp'),
             'required' => false,
             'autofocus' => false,
-            'placeholder' => trans('proposal.placeholders.tanggal_kontrak'),
+            'placeholder' => trans('proposal.placeholders.tempat_kp'),
         ])
+        <small class="form-text text-muted" for="tempat_kp">
+            Wajib diisi apabila jenisnya kerja praktek.
+        </small>
     </div>
 </div>

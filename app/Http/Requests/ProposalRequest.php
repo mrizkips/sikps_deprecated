@@ -26,11 +26,10 @@ class ProposalRequest extends FormRequest
     {
         return [
             'judul' => 'required|string',
-            'jenis' => 'required|in:Skripsi,Kerja Praktek',
+            'jenis' => 'required|in:1,2',
             'dokumen' => 'mimes:pdf|max:2048',
             'pendaftaran_id' => 'required|exists:pendaftaran,id',
-            'kbb_id' => 'required|exists:kbb,id',
-            'tanggal_kontrak' => 'required|date',
+            'tempat_kp' => 'required_if:jenis,2',
         ];
     }
 
@@ -47,7 +46,19 @@ class ProposalRequest extends FormRequest
             'dokumen' => trans('proposal.fields.dokumen'),
             'pendaftaran_id' => trans('proposal.fields.pendaftaran_id'),
             'kbb_id' => trans('proposal.fields.kbb_id'),
-            'tanggal_kontrak' => trans('proposal.fields.tanggal_kontrak'),
+            'tempat_kp' => trans('proposal.fields.tempat_kp'),
         ];
     }
+
+    /**
+ * Get the error messages for the defined validation rules.
+ *
+ * @return array
+ */
+public function messages()
+{
+    return [
+        'tempat_kp.required_if'  => 'Tempat KP wajib diisi bila :other adalah '.config('constant.jenis_proposal.2'),
+    ];
+}
 }

@@ -32,9 +32,10 @@ class ProposalController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa']);
+            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa'])->select('proposal.*')->where('mahasiswa_id', auth()->user()->mahasiswa->id);
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
+                ->editColumn('jenis', 'proposal.component.jenis')
                 ->addColumn('tipe', function($row) {
                     $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
                     return $badge;
@@ -58,9 +59,8 @@ class ProposalController extends Controller
      */
     public function create()
     {
-        $kbb = Kbb::all();
         $pendaftaran = Pendaftaran::proposal()->active()->get();
-        return view('mahasiswa.proposal.form', compact('kbb', 'pendaftaran'));
+        return view('mahasiswa.proposal.form', compact('pendaftaran'));
     }
 
     /**
@@ -126,9 +126,8 @@ class ProposalController extends Controller
      */
     public function edit(Proposal $proposal)
     {
-        $kbb = Kbb::all();
         $pendaftaran = Pendaftaran::proposal()->active()->get();
-        return view('mahasiswa.proposal.form', compact('kbb', 'pendaftaran', 'proposal'));
+        return view('mahasiswa.proposal.form', compact('pendaftaran', 'proposal'));
     }
 
     /**

@@ -19,7 +19,7 @@ class Proposal extends Model
      * @var array
      */
     protected $fillable = [
-        'judul', 'jenis', 'mahasiswa_id', 'dokumen', 'pendaftaran_id', 'kbb_id', 'tanggal_kontrak', 'dosen_id',
+        'judul', 'jenis', 'mahasiswa_id', 'dokumen', 'pendaftaran_id', 'dosen_id', 'tempat_kp',
     ];
 
     /**
@@ -39,7 +39,7 @@ class Proposal extends Model
      */
     public function dosen()
     {
-        return $this->belongsTo(Dosen::class, 'dosen_id', 'id');
+        return $this->belongsTo(Dosen::class, 'dosen_id', 'id')->withDefault(['user' => ['nama' => '-']]);
     }
 
     /**

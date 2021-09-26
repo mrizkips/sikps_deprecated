@@ -31,6 +31,7 @@
                                             <td>Nama</td>
                                             <td>Email</td>
                                             <td>No. HP</td>
+                                            <td>Keahlian</td>
                                             <td>Tanggal Dibuat</td>
                                             <td>Aksi</td>
                                         </tr>
@@ -64,6 +65,7 @@
                 {data: 'user.nama', name: 'user.nama'},
                 {data: 'user.email', name: 'user.email'},
                 {data: 'no_hp', name: 'no_hp'},
+                {data: 'keahlian', name: 'keahlian', defaultContent: '-'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', 'searchable': false, orderable: false}
             ],
