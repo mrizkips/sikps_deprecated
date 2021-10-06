@@ -43,16 +43,6 @@ class Proposal extends Model
     }
 
     /**
-     * Get the user on a certain records.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function kbb()
-    {
-        return $this->belongsTo(Kbb::class, 'kbb_id', 'id');
-    }
-
-    /**
      * Get a certain records.
      */
     public function status()
@@ -66,5 +56,27 @@ class Proposal extends Model
     public function pendaftaran()
     {
         return $this->belongsTo(Pendaftaran::class, 'pendaftaran_id', 'id');
+    }
+
+    /**
+     * Scope query untuk kerja praktek.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeKp($query)
+    {
+        return $query->where('jenis', '2');
+    }
+
+    /**
+     * Scope query untuk kerja praktek.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSkripsi($query)
+    {
+        return $query->where('jenis', '1');
     }
 }

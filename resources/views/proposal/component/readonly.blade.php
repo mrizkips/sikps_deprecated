@@ -13,7 +13,7 @@
 <div class="form-group row">
     <label for="dokumen" class="col-md-3 col-form-label">Dokumen</label>
     <div class="col-md">
-        <a href="{{ asset("storage/{$proposal->dokumen}") }}">{{ $proposal->dokumen }}</a>
+        <a href="{{ asset("storage/{$proposal->dokumen}") }}" class="btn btn-primary"><i class="cil-data-transfer-down"></i> Unduh Dokumen</a>
     </div>
 </div>
 @isset($proposal->tempat_kp)

@@ -24,7 +24,7 @@ return [
         'kbb_id' => 'Pilih KBB',
         'jurusan_id' => 'Pilih Jurusan',
         'alamat' => 'Masukkan Alamat',
-        'no_hp' => 'No. Handphone',
+        'no_hp' => 'No. Handphone / WA',
         'jen_kel' => 'Pilih Jenis Kelamin',
         'tempat_lahir' => 'Masukkan Tempat Lahir',
         'tanggal_lahir' => 'Masukkan Tanggal Lahir',

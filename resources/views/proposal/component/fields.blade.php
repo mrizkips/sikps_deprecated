@@ -59,7 +59,7 @@
         @enderror
     </div>
 </div>
-<div class="form-group row">
+<div class="form-group row" id="field_kp">
     <label for="tempat_kp" class="col-md-3 col-form-label">Tempat KP*</label>
     <div class="col-md">
         @include('components.input', [
@@ -75,3 +75,22 @@
         </small>
     </div>
 </div>
+
+@section('javascript')
+<script>
+    $(document).ready(function() {
+        $('#field_kp').hide()
+    });
+
+    $('#jenis').on('change', function() {
+        value = $(this).val()
+        field = $('#field_kp')
+
+        if (value == 2) {
+            field.slideDown()
+        } else {
+            field.slideUp()
+        }
+    });
+</script>
+@endsection

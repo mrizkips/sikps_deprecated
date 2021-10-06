@@ -11,7 +11,7 @@ class Sidang extends Model
      *
      * @var string
      */
-    protected $table = 'proposal';
+    protected $table = 'sidang';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,7 @@ class Sidang extends Model
      * @var array
      */
     protected $fillable = [
-        'proposal_id', 'dokumen', 'pendaftaran_id',
+        'jenis', 'proposal_id', 'pendaftaran_id', 'laporan', 'penilaian_kp', 'catatan',
     ];
 
     /**
@@ -28,5 +28,25 @@ class Sidang extends Model
     public function status()
     {
         return $this->morphOne(Status::class, 'statusable');
+    }
+
+    /**
+     * Get the user on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function proposal()
+    {
+        return $this->belongsTo(Proposal::class, 'proposal_id', 'id');
+    }
+
+    /**
+     * Get the user on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pendaftaran()
+    {
+        return $this->belongsTo(Pendaftaran::class, 'pendaftaran_id', 'id');
     }
 }

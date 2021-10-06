@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Baak extends Model
+class Absen extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'baak';
+    protected $table = 'absen';
 
     /**
      * The attributes that are mass assignable.
@@ -19,23 +19,26 @@ class Baak extends Model
      * @var array
      */
     protected $fillable = [
-        'nip', 'user_id', 'no_hp', 'jen_kel',
+        'proposal_id', 'mahasiswa_id', 'catatan',
     ];
-
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    protected $with = ['user'];
 
     /**
      * Get the user on a certain records.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function proposal()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Proposal::class, 'proposal_id', 'id');
+    }
+
+    /**
+     * Get the user on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id');
     }
 }

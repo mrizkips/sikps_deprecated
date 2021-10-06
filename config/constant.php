@@ -21,4 +21,10 @@ return [
         '1' => 'Skripsi',
         '2' => 'Kerja Praktek'
     ],
+
+    'jenis_sidang' => [
+        '1' => 'Sidang Skripsi',
+        '2' => 'Pra-Sidang Skripsi',
+        '3' => 'Sidang KP',
+    ]
 ];

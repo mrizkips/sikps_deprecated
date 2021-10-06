@@ -9,6 +9,9 @@
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.proposal.index') }}">
         <i class="cil-task c-sidebar-nav-icon"></i> Proposal</a>
     </li>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.beranda') }}">
+        <i class="cil-briefcase c-sidebar-nav-icon"></i> Sidang</a>
+    </li>
     <li class="c-sidebar-nav-title">Data Pengguna</li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.mahasiswa.index') }}">
         <i class="cil-people c-sidebar-nav-icon"></i> Mahasiswa</a>
