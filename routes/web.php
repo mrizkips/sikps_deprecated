@@ -41,6 +41,8 @@ function () {
     Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'edit', 'update']);
     Route::post('proposal/{proposal}/approval', 'ProposalController@approval')->name('proposal.approval');
     Route::post('proposal/{proposal}/assign', 'ProposalController@assign')->name('proposal.assign');
+    Route::resource('jadwal', 'JadwalController')->only(['index', 'show']);
+    Route::resource('bimbingan', 'BimbinganController')->only(['index', 'show']);
 });
 
 Route::group([
@@ -50,6 +52,9 @@ Route::group([
     'middleware' => ['auth:mahasiswa']
 ],
 function() {
+    Route::get('/', function() {
+        return redirect()->route('mahasiswa.beranda');
+    });
     Route::get('beranda', 'BerandaController@index')->name('beranda');
     Route::get('profil/{mahasiswa}', 'ProfilController@show')->name('profil.show');
     Route::get('profil/{mahasiswa}/edit', 'ProfilController@edit')->name('profil.edit');
@@ -57,6 +62,9 @@ function() {
 
     // KP & Skripsi
     Route::resource('proposal', 'ProposalController');
+    Route::resource('jadwal', 'JadwalController')->only(['index']);
+    Route::resource('bimbingan', 'BimbinganController');
+    Route::get('get_proposal', 'BimbinganController@getProposal')->name('bimbingan.get_proposal');
 });
 
 Route::group([
@@ -66,13 +74,18 @@ Route::group([
     'middleware' => ['auth:dosen']
 ],
 function() {
+    Route::get('/', function() {
+        return redirect()->route('dosen.beranda');
+    });
     Route::get('beranda', 'BerandaController@index')->name('beranda');
     Route::get('profil/{dosen}', 'ProfilController@show')->name('profil.show');
     Route::get('profil/{dosen}/edit', 'ProfilController@edit')->name('profil.edit');
     Route::put('profil/{dosen}', 'ProfilController@update')->name('profil.update');
 
     // KP & Skripsi
-    Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'destroy', 'edit', 'update']);
+    Route::resource('proposal', 'ProposalController')->only(['index', 'show']);
+    Route::resource('jadwal', 'JadwalController');
+    Route::resource('bimbingan', 'BimbinganController')->only(['index', 'show', 'destroy']);
 });
 
 Route::group([
@@ -82,6 +95,9 @@ Route::group([
     'middleware' => ['auth:baak']
 ],
 function() {
+    Route::get('/', function() {
+        return redirect()->route('baak.beranda');
+    });
     Route::get('beranda', 'BerandaController@index')->name('beranda');
     Route::get('profil/{baak}', 'ProfilController@show')->name('profil.show');
     Route::get('profil/{baak}/edit', 'ProfilController@edit')->name('profil.edit');
@@ -99,6 +115,9 @@ Route::group([
     'middleware' => ['auth:keuangan']
 ],
 function() {
+    Route::get('/', function() {
+        return redirect()->route('keuangan.beranda');
+    });
     Route::get('beranda', 'BerandaController@index')->name('beranda');
     Route::get('profil/{keuangan}', 'ProfilController@show')->name('profil.show');
     Route::get('profil/{keuangan}/edit', 'ProfilController@edit')->name('profil.edit');

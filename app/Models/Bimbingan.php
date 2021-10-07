@@ -19,16 +19,46 @@ class Bimbingan extends Model
      * @var array
      */
     protected $fillable = [
-        'dosen_id', 'tanggal', 'mulai', 'selesai', 'pin', 'link', 'catatan',
+        'proposal_id', 'mahasiswa_id', 'dosen_id', 'jadwal_id', 'catatan',
     ];
 
     /**
-     * Get the user on a certain records.
+     * Get the proposal on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function proposal()
+    {
+        return $this->belongsTo(Proposal::class, 'proposal_id', 'id');
+    }
+
+    /**
+     * Get the mahasiswa on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id');
+    }
+
+    /**
+     * Get the dosen on a certain records.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function dosen()
     {
         return $this->belongsTo(Dosen::class, 'dosen_id', 'id');
+    }
+
+    /**
+     * Get the jadwal on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal::class, 'jadwal_id', 'id');
     }
 }

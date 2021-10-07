@@ -9,6 +9,12 @@
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.proposal.index') }}">
         <i class="cil-task c-sidebar-nav-icon"></i> Proposal</a>
     </li>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.jadwal.index') }}">
+        <i class="cil-calendar c-sidebar-nav-icon"></i> Jadwal Bimbingan</a>
+    </li>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.bimbingan.index') }}">
+        <i class="cil-star c-sidebar-nav-icon"></i> Bimbingan</a>
+    </li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.beranda') }}">
         <i class="cil-briefcase c-sidebar-nav-icon"></i> Sidang</a>
     </li>

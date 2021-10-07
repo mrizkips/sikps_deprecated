@@ -19,9 +19,10 @@ class ProposalController extends Controller
     {
         $user = auth()->user();
         if ($request->ajax()) {
-            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user', 'kbb'])->where('dosen_id', $user->dosen->id);
+            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*')->where('dosen_id', $user->dosen->id);
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
+                ->editColumn('jenis', 'proposal.component.jenis')
                 ->addColumn('tipe', function($row) {
                     $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
                     return $badge;

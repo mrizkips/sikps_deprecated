@@ -1,22 +1,25 @@
 @extends('layouts.base')
 
-@section('title', 'Proposal - '.config('app.name'))
+@section('title', 'Jadwal Bimbingan - '.config('app.name'))
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item active">Proposal</li>
+    <li class="breadcrumb-item active">Jadwal Bimbingan</li>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="fade-in">
-            <h3 class="mb-4"><strong><i class="cil-task">
-                </i>&nbsp;Proposal</strong>
+            <h3 class="mb-4"><strong><i class="cil-calendar">
+                </i>&nbsp;Jadwal Bimbingan</strong>
             </h3>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card card-accent-primary">
                         <div class="card-header">
-                            <strong class="text-primary">List Proposal</strong>
+                            <strong class="text-primary">Daftar Jadwal Bimbingan</strong>
+                            <a href="{{ route('dosen.jadwal.create') }}" class="btn btn-primary float-right">
+                                <i class="cil-plus"></i> Tambah Jadwal
+                            </a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -24,11 +27,12 @@
                                     <thead>
                                         <tr>
                                             <td>#</td>
-                                            <td>Judul</td>
-                                            <td>Jenis</td>
-                                            <td>Nama Mahasiswa</td>
-                                            <td>Status</td>
                                             <td>Dosen Pembimbing</td>
+                                            <td>Tanggal</td>
+                                            <td>Jam Mulai</td>
+                                            <td>Jam Selesai</td>
+                                            <td>Pin</td>
+                                            <td>Link</td>
                                             <td>Tanggal Dibuat</td>
                                             <td>Aksi</td>
                                         </tr>
@@ -55,18 +59,29 @@
             },
             processing: true,
             serverSide: true,
-            ajax: "{{ route('dosen.proposal.index') }}",
+            ajax: "{{ route('dosen.jadwal.index') }}",
             columns: [
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
-                {data: 'judul', name: 'judul'},
-                {data: 'jenis', name: 'jenis'},
-                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama'},
-                {data: 'tipe', name: 'tipe', searchable: false, orderable:false},
                 {data: 'dosen.user.nama', name: 'dosen.user.nama'},
+                {data: 'tanggal', name: 'tanggal'},
+                {data: 'mulai', name: 'mulai', searchable: false, orderable:false},
+                {data: 'selesai', name: 'selesai', searchable: false, orderable:false},
+                {data: 'pin', name: 'pin', searchable: false, orderable:false},
+                {data: 'link', name: 'link', searchable: false, orderable:false, render: function (data,type) {
+                    if (data === null) {
+                        return "-";
+                    }
+
+                    if (type === 'display') {
+                        return '<a href="' + data + '" class="btn btn-primary btn-sm" target="_blank"><i class="cil-external-link"></i> Buka Link</a>';
+                    }
+
+                    return data;
+                }},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', searchable: false, orderable: false}
             ],
-            order: ['6', 'desc']
+            order: ['7', 'desc']
         });
     });
 </script>

@@ -12,7 +12,7 @@ return [
         'password_confirmation' => 'Konfirmasi Password',
     ],
     'placeholders' => [
-        'nama' => 'Masukkan nama dosen',
+        'nama' => 'Masukkan nama petugas',
         'email' => 'Masukkan alamat email',
         'nip' => 'Masukkan NIP',
         'no_hp' => 'Masukkan No. HP',
@@ -27,9 +27,9 @@ return [
             'delete' => 'Petugas berhasil dihapus.'
         ],
         'errors' => [
-            'create' => 'Gagal menambahkan dosen.',
-            'update' => 'Gagal merubah dosen.',
-            'delete' => 'Gagal menghapus dosen.',
+            'create' => 'Gagal menambahkan petugas.',
+            'update' => 'Gagal merubah petugas.',
+            'delete' => 'Gagal menghapus petugas.',
             'not_found' => 'Petugas tidak ditemukan.',
         ],
     ]

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableBimbingan extends Migration
+class CreateTableJadwal extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTableBimbingan extends Migration
      */
     public function up()
     {
-        Schema::create('bimbingan', function (Blueprint $table) {
+        Schema::create('jadwal', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->unsignedBigInteger('dosen_id');
@@ -39,6 +39,6 @@ class CreateTableBimbingan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bimbingan');
+        Schema::dropIfExists('jadwal');
     }
 }

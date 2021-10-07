@@ -70,7 +70,7 @@ class Proposal extends Model
     }
 
     /**
-     * Scope query untuk kerja praktek.
+     * Scope query untuk skripsi.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder

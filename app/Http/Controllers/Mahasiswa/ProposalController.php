@@ -32,7 +32,7 @@ class ProposalController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa'])->select('proposal.*')->where('mahasiswa_id', auth()->user()->mahasiswa->id);
+            $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*')->where('mahasiswa_id', auth()->user()->mahasiswa->id);
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
                 ->editColumn('jenis', 'proposal.component.jenis')
