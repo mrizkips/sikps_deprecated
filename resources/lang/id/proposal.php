@@ -21,7 +21,7 @@ return [
             'create' => 'Proposal berhasil ditambahkan.',
             'update' => 'Proposal berhasil diubah.',
             'delete' => 'Proposal berhasil dihapus.',
-            'approve' => 'Tempat berhasil disetujui.',
+            'approve' => 'Proposal berhasil disetujui.',
             'disapprove' => 'Proposal berhasil ditolak.',
             'assign' => 'Dosen pembimbing berhasil ditambahkan',
         ],
@@ -31,10 +31,10 @@ return [
             'delete' => 'Gagal menghapus proposal.',
             'not_found' => 'Proposal tidak ditemukan.',
             'expired' => 'Sudah melewati batas waktu pendaftaran.',
-            'approved' => 'Proposal sudah disetujui..',
+            'approved' => 'Proposal yang sudah disetujui tidak bisa dihapus.',
             'approve' => 'Proposal gagal disetujui.',
             'disapprove' => 'Proposal gagal ditolak.',
-            'assign' => 'Gagal menambahkan dosen pembimbing',
+            'assign' => 'Gagal menambahkan dosen pembimbing.',
         ],
     ]
 ];

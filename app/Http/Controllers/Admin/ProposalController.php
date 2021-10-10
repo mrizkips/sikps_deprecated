@@ -26,20 +26,20 @@ class ProposalController extends Controller
             $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*');
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
-                ->editColumn('jenis', 'proposal.component.jenis')
+                ->editColumn('jenis', 'components.proposal.jenis')
                 ->addColumn('tipe', function($row) {
-                    $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
+                    $badge = view('components.status', ['status' => $row->status->tipe]);
                     return $badge;
                 })
                 ->addColumn('action', function($row) {
-                    $approve = view('proposal.component.approve', ['url' => route('admin.proposal.approval', $row->id), 'id' => $row->id]);
-                    $disapprove = view('proposal.component.disapprove', ['url' => route('admin.proposal.approval', $row->id), 'id' => $row->id]);
+                    $approve = view('components.proposal.approve', ['url' => route('admin.proposal.approval', $row->id), 'id' => $row->id]);
+                    $disapprove = view('components.proposal.disapprove', ['url' => route('admin.proposal.approval', $row->id), 'id' => $row->id]);
                     $show = view('components.show', ['url' => route('admin.proposal.show', $row->id)]);
                     $destroy = view('components.delete', ['url' => route('admin.proposal.destroy', $row->id)]);
 
                     if ($row->status->tipe == "1") {
                         $dosen = Dosen::all();
-                        $assign = view('proposal.component.assign', ['url' => route('admin.proposal.assign', $row->id), 'id' => $row->id, 'dosen' => $dosen]);
+                        $assign = view('components.proposal.assign', ['url' => route('admin.proposal.assign', $row->id), 'id' => $row->id, 'dosen' => $dosen]);
                         return $approve.$disapprove.$assign.$show.$destroy;
                     }
 

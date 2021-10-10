@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ProposalRequest extends FormRequest
+class SidangRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,12 @@ class ProposalRequest extends FormRequest
     public function rules()
     {
         return [
-            'judul' => 'required|string',
-            'jenis' => 'required|in:1,2',
-            'dokumen' => 'mimes:pdf|max:2048',
+            'jenis' => 'required|in:1,2,3',
+            'proposal_id' => 'required|exists:proposal,id',
             'pendaftaran_id' => 'required|exists:pendaftaran,id',
-            'tempat_kp' => 'required_if:jenis,2',
+            'laporan' => 'mimes:pdf|max:2048',
+            'penilaian_kp' => 'mimes:pdf|max:10240',
+            'catatan' => 'nullable|string',
         ];
     }
 
@@ -41,11 +42,12 @@ class ProposalRequest extends FormRequest
     public function attributes()
     {
         return [
-            'judul' => trans('proposal.fields.judul'),
-            'jenis' => trans('proposal.fields.jenis'),
-            'dokumen' => trans('proposal.fields.dokumen'),
-            'pendaftaran_id' => trans('proposal.fields.pendaftaran_id'),
-            'tempat_kp' => trans('proposal.fields.tempat_kp'),
+            'jenis' => trans('sidang.fields.jenis'),
+            'proposal_id' => trans('sidang.fields.proposal_id'),
+            'pendaftaran_id' => trans('sidang.fields.pendaftaran_id'),
+            'laporan' => trans('sidang.fields.laporan'),
+            'penilaian_kp' => trans('sidang.fields.penilaian_kp'),
+            'catatan' => trans('sidang.fields.catatan'),
         ];
     }
 
@@ -57,7 +59,7 @@ class ProposalRequest extends FormRequest
     public function messages()
     {
         return [
-            'tempat_kp.required_if'  => ':Attribute wajib diisi bila :other adalah '.config('constant.jenis_proposal.2'),
+            'penilaian_kp.required_if'  => ':Attribute wajib diisi bila :other adalah '.config('constant.jenis_sidang.3'),
         ];
     }
 }

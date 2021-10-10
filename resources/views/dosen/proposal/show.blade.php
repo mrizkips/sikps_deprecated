@@ -17,7 +17,7 @@
                 <div class="card card-accent-primary">
                     <div class="card-header"><strong class="text-primary">Data Proposal</strong></div>
                     <div class="card-body">
-                        @include('proposal.component.readonly', $proposal)
+                        @include('components.proposal.readonly', $proposal)
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('admin.proposal.index') }}" class="btn btn-secondary"><i class="cil-arrow-thick-left"></i> Kembali</a>

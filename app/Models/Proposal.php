@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Null_;
 
 class Proposal extends Model
 {
@@ -78,5 +79,24 @@ class Proposal extends Model
     public function scopeSkripsi($query)
     {
         return $query->where('jenis', '1');
+    }
+
+    /**
+     * Scope query untuk status diterima.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeApproved($query)
+    {
+        return $query->where('dosen_id', '!=', null);
+    }
+
+    /**
+     * Get a certain records.
+     */
+    public function sidang()
+    {
+        return $this->hasOne(Sidang::class);
     }
 }

@@ -22,7 +22,7 @@
                     <div class="card card-accent-primary">
                         <div class="card-header"><strong class="text-primary">Input Data Proposal</strong></div>
                         <div class="card-body">
-                            @include('proposal.component.fields')
+                            @include('components.proposal.fields')
                         </div>
                         <div class="card-footer">
                             <a href="{{ route('mahasiswa.proposal.index') }}" class="btn btn-secondary"><i class="cil-arrow-thick-left"></i> Kembali</a>

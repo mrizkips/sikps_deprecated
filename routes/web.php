@@ -65,6 +65,7 @@ function() {
     Route::resource('jadwal', 'JadwalController')->only(['index']);
     Route::resource('bimbingan', 'BimbinganController');
     Route::get('get_proposal', 'BimbinganController@getProposal')->name('bimbingan.get_proposal');
+    Route::resource('sidang', 'SidangController');
 });
 
 Route::group([
@@ -86,6 +87,8 @@ function() {
     Route::resource('proposal', 'ProposalController')->only(['index', 'show']);
     Route::resource('jadwal', 'JadwalController');
     Route::resource('bimbingan', 'BimbinganController')->only(['index', 'show', 'destroy']);
+    Route::resource('sidang', 'SidangController')->only(['index', 'show']);
+    Route::post('sidang/{sidang}/approval', 'SidangController@approval')->name('sidang.approval');
 });
 
 Route::group([

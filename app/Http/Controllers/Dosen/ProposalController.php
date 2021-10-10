@@ -22,9 +22,9 @@ class ProposalController extends Controller
             $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*')->where('dosen_id', $user->dosen->id);
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
-                ->editColumn('jenis', 'proposal.component.jenis')
+                ->editColumn('jenis', 'components.proposal.jenis')
                 ->addColumn('tipe', function($row) {
-                    $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
+                    $badge = view('components.status', ['status' => $row->status->tipe]);
                     return $badge;
                 })
                 ->addColumn('action', function($row) {

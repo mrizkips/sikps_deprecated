@@ -35,9 +35,9 @@ class ProposalController extends Controller
             $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*')->where('mahasiswa_id', auth()->user()->mahasiswa->id);
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
-                ->editColumn('jenis', 'proposal.component.jenis')
+                ->editColumn('jenis', 'components.proposal.jenis')
                 ->addColumn('tipe', function($row) {
-                    $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
+                    $badge = view('components.status', ['status' => $row->status->tipe]);
                     return $badge;
                 })
                 ->addColumn('action', function($row) {
@@ -74,7 +74,7 @@ class ProposalController extends Controller
     {
         $request->validate(['dokumen' => 'required']);
         $pendaftaran = Pendaftaran::find($request->pendaftaran_id);
-        if ($pendaftaran->akhir < now()) {
+        if (!$pendaftaran->akhir >= today()) {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'danger',
                 'message' => trans('proposal.messages.errors.expired'),
@@ -126,7 +126,7 @@ class ProposalController extends Controller
      */
     public function edit(Proposal $proposal)
     {
-        $pendaftaran = Pendaftaran::proposal()->active()->get();
+        $pendaftaran = Pendaftaran::proposal()->get();
         return view('mahasiswa.proposal.form', compact('pendaftaran', 'proposal'));
     }
 
@@ -187,7 +187,7 @@ class ProposalController extends Controller
             ]);
         }
 
-        if ($proposal->status->tipe == "Disetujui") {
+        if ($proposal->status->tipe == "1") {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'danger',
                 'message' => trans('proposal.messages.errors.approved'),

@@ -46,12 +46,15 @@
 <div class="form-group row">
     <label for="pendaftaran_id" class="col-md-3 col-form-label">Periode Pendaftaran*</label>
     <div class="col-md">
-        <select name="pendaftaran_id" id="pendaftaran_id" class="form-control @error('pendaftaran_id') is-invalid @enderror">
+        <select name="pendaftaran_id" id="pendaftaran_id" class="form-control @error('pendaftaran_id') is-invalid @enderror" @isset($proposal)disabled @endisset>
             <option>{{ trans('proposal.placeholders.pendaftaran_id') }}</option>
             @foreach ($pendaftaran as $item)
                 <option value="{{ $item->id }}" {{ isset($proposal) ? ($proposal->pendaftaran_id == $item->id ? 'selected' : (old('pendaftaran_id') == $item->id ? 'selected' : '')) : '' }}>{{ $item->judul }}</option>
             @endforeach
         </select>
+        @isset($proposal)
+            <input type="hidden" name="pendaftaran_id" value="{{ $proposal->pendaftaran_id }}">
+        @endisset
         @error('pendaftaran_id')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

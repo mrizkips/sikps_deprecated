@@ -22,14 +22,14 @@ class ProposalController extends Controller
             $proposal = Proposal::query()->with(['status', 'dosen.user', 'mahasiswa.user'])->select('proposal.*');
             return DataTables::eloquent($proposal)
                 ->addIndexColumn()
-                ->editColumn('jenis', 'proposal.component.jenis')
+                ->editColumn('jenis', 'components.proposal.jenis')
                 ->addColumn('tipe', function($row) {
-                    $badge = view('proposal.component.status', ['status' => $row->status->tipe]);
+                    $badge = view('components.status', ['status' => $row->status->tipe]);
                     return $badge;
                 })
                 ->addColumn('action', function($row) {
-                    $approve = view('proposal.component.approve', ['url' => route('baak.proposal.approval', $row->id), 'id' => $row->id]);
-                    $disapprove = view('proposal.component.disapprove', ['url' => route('baak.proposal.approval', $row->id), 'id' => $row->id]);
+                    $approve = view('components.proposal.approve', ['url' => route('baak.proposal.approval', $row->id), 'id' => $row->id]);
+                    $disapprove = view('components.proposal.disapprove', ['url' => route('baak.proposal.approval', $row->id), 'id' => $row->id]);
                     $show = view('components.show', ['url' => route('baak.proposal.show', $row->id)]);
                     return $approve.$disapprove.$show;
                 })

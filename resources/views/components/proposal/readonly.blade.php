@@ -34,7 +34,7 @@
 <div class="form-group row">
     <label for="approval_prodi" class="col-md-3 col-form-label text-capitalize">Persetujuan {{ $approval->role->nama }}</label>
     <div class="col-md">
-        @include('proposal.component.status', ['status' => $approval->tipe])
+        @include('components.status', ['status' => $approval->tipe])
     </div>
 </div>
 @isset($approval->catatan)

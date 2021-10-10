@@ -1,18 +1,25 @@
 @extends('layouts.base')
 
-@section('title', 'Proposal - '.config('app.name'))
+@section('title', 'Sidang - '.config('app.name'))
+
+@section('breadcrumbs')
+    <li class="breadcrumb-item active">Sidang</li>
+@endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="fade-in">
-            <h3 class="mb-4"><strong><i class="cil-task">
-                </i>&nbsp;Proposal</strong>
+            <h3 class="mb-4"><strong><i class="cil-briefcase">
+                </i>&nbsp;Sidang</strong>
             </h3>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card card-accent-primary">
                         <div class="card-header">
-                            <strong class="text-primary">List Proposal</strong>
+                            <strong class="text-primary">List Sidang</strong>
+                            <a href="{{ route('mahasiswa.sidang.create') }}" class="btn btn-primary float-right">
+                                <i class="cil-plus"></i> Tambah Sidang
+                            </a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -22,11 +29,11 @@
                                             <td>#</td>
                                             <td>Judul</td>
                                             <td>Jenis</td>
-                                            <td>Nama Mahasiswa</td>
-                                            <td>KBB</td>
                                             <td>Status</td>
+                                            <td>Mahasiswa</td>
                                             <td>Dosen Pembimbing</td>
                                             <td>Tanggal Dibuat</td>
+                                            <td>Aksi</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,21 +58,16 @@
             },
             processing: true,
             serverSide: true,
-            ajax: "{{ route('proposal.index') }}",
+            ajax: "{{ route('mahasiswa.sidang.index') }}",
             columns: [
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
-                {data: 'judul', name: 'judul'},
+                {data: 'proposal.judul', name: 'proposal.judul'},
                 {data: 'jenis', name: 'jenis'},
-                {data: 'mahasiswa.user.nama', name: 'mahasiswa.user.nama', orderable: false},
-                {data: 'kbb.nama', name: 'kbb.nama', orderable: false},
                 {data: 'tipe', name: 'tipe', searchable: false, orderable:false},
-                {data: 'dosen', name: 'dosen', searchable: false, orderable:false, render: function(data, type) {
-                    if (data === null) {
-                        return "-"
-                    }
-                    return data.user.nama
-                }},
+                {data: 'proposal.mahasiswa.user.nama', name: 'proposal.mahasiswa.user.nama'},
+                {data: 'proposal.dosen.user.nama', name: 'proposal.dosen.user.nama'},
                 {data: 'created_at', name: 'created_at'},
+                {data: 'action', name: 'action', 'searchable': false, orderable: false}
             ],
             order: ['6', 'desc']
         });
