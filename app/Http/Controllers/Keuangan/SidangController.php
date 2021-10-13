@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Dosen;
+namespace App\Http\Controllers\Keuangan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Proposal;
 use App\Models\Sidang;
 use App\Services\SidangService;
 use Yajra\DataTables\Facades\DataTables;
@@ -18,14 +17,8 @@ class SidangController extends Controller
      */
     public function index(Request $request)
     {
-        $proposal = Proposal::where('dosen_id', auth()->user()->dosen->id)->get();
-        $list = [];
-        foreach ($proposal as $key => $value) {
-            $list[$key] = $value->id;
-        }
-
         if ($request->ajax()) {
-            $sidang = Sidang::query()->with(['proposal.dosen.user', 'proposal.mahasiswa.user', 'status', 'pendaftaran'])->whereIn('proposal_id', $list)->select('sidang.*');
+            $sidang = Sidang::query()->with(['proposal.dosen.user', 'proposal.mahasiswa.user', 'status', 'pendaftaran'])->select('sidang.*');
             return DataTables::eloquent($sidang)
                 ->addIndexColumn()
                 ->editColumn('jenis', 'components.sidang.jenis')
@@ -34,15 +27,15 @@ class SidangController extends Controller
                     return $badge;
                 })
                 ->addColumn('action', function($row) {
-                    $approve = view('components.sidang.approve', ['url' => route('dosen.sidang.approval', $row->id), 'id' => $row->id]);
-                    $disapprove = view('components.sidang.disapprove', ['url' => route('dosen.sidang.approval', $row->id), 'id' => $row->id]);
-                    $show = view('components.show', ['url' => route('dosen.sidang.show', $row->id)]);
+                    $approve = view('components.sidang.approve', ['url' => route('keuangan.sidang.approval', $row->id), 'id' => $row->id]);
+                    $disapprove = view('components.sidang.disapprove', ['url' => route('keuangan.sidang.approval', $row->id), 'id' => $row->id]);
+                    $show = view('components.show', ['url' => route('keuangan.sidang.show', $row->id)]);
                     return $approve.$disapprove.$show;
                 })
                 ->rawColumns(['tipe', 'action'])
                 ->make();
         }
-        return view('dosen.sidang.index');
+        return view('keuangan.sidang.index');
     }
 
     /**
@@ -53,7 +46,7 @@ class SidangController extends Controller
      */
     public function show(Request $request, Sidang $sidang)
     {
-        return view('dosen.sidang.show', compact('sidang'));
+        return view('keuangan.sidang.show', compact('sidang'));
     }
 
     /**
@@ -77,7 +70,7 @@ class SidangController extends Controller
         }
 
         if ($service->approval($sidang, $fields)) {
-            return redirect()->route('dosen.sidang.index')->with('flash_messages', [
+            return redirect()->route('keuangan.sidang.index')->with('flash_messages', [
                 'type' => 'success',
                 'message' => $success,
             ]);

@@ -21,7 +21,10 @@
         <i class="cil-star c-sidebar-nav-icon"></i> Bimbingan</a>
     </li>
     <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('dosen.sidang.index') }}">
-        <i class="cil-briefcase c-sidebar-nav-icon"></i> Sidang</a>
+        <i class="cil-briefcase c-sidebar-nav-icon"></i> Pengajuan Sidang</a>
+    </li>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('dosen.pengujian.index') }}">
+        <i class="cil-badge c-sidebar-nav-icon"></i> Pengujian Sidang</a>
     </li>
     <li class="c-sidebar-nav-title">Data Pengguna</li>
     <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">

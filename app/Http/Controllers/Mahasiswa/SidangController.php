@@ -65,7 +65,7 @@ class SidangController extends Controller
     public function create(Request $request)
     {
         if ($request->ajax()) {
-            return $this->get_proposal($request->jenis);
+            return $this->getProposal($request->jenis);
         }
 
         $proposal = Proposal::approved()->where('mahasiswa_id', auth()->user()->mahasiswa->id)->get();
@@ -88,7 +88,7 @@ class SidangController extends Controller
         ]);
 
         $pendaftaran = Pendaftaran::find($request->pendaftaran_id);
-        if ($this->is_expired($pendaftaran)) {
+        if (!$pendaftaran->akhir >= today()) {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'danger',
                 'message' => trans('sidang.messages.errors.expired'),
@@ -96,7 +96,7 @@ class SidangController extends Controller
         }
 
         $proposal = Proposal::find($request->proposal_id);
-        if ($this->is_duplicate($pendaftaran, $proposal)) {
+        if ($this->isDuplicate($pendaftaran, $proposal)) {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'danger',
                 'message' => trans('sidang.messages.errors.duplicate'),
@@ -158,7 +158,7 @@ class SidangController extends Controller
     public function edit(Request $request, Sidang $sidang)
     {
         if ($request->ajax()) {
-            return $this->get_proposal($request->jenis);
+            return $this->getProposal($request->jenis);
         }
 
         $proposal = Proposal::approved()->where('mahasiswa_id', auth()->user()->mahasiswa->id)->get();
@@ -259,7 +259,7 @@ class SidangController extends Controller
      * @param int $jenis
      * @return mixed
      */
-    protected function get_proposal($jenis)
+    protected function getProposal($jenis)
     {
         $mahasiswa = auth()->user()->mahasiswa;
         $html = "<option>".trans('sidang.placeholders.proposal_id')."</option>";
@@ -286,24 +286,13 @@ class SidangController extends Controller
      * @param \App\Models\Proposal $proposal
      * @return bool
      */
-    protected function is_duplicate(Pendaftaran $pendaftaran, Proposal $proposal)
+    protected function isDuplicate(Pendaftaran $pendaftaran, Proposal $proposal)
     {
-        $sidang = Sidang::where([
+        $count = Sidang::where([
             ['pendaftaran_id', $pendaftaran->id],
             ['proposal_id', $proposal->id],
-        ]);
+        ])->count();
 
-        return isset($sidang);
-    }
-
-    /**
-     * Check pendaftaran expiration date.
-     *
-     * @param \App\Models\Pendaftaran $pendaftaran
-     * @return mixed
-     */
-    protected function is_expired(Pendaftaran $pendaftaran)
-    {
-        return ($pendaftaran->akhir < today());
+        return ($count > 0);
     }
 }

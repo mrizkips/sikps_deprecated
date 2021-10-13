@@ -14,4 +14,5 @@ return [
 
     'failed'   => 'Identitas tersebut tidak cocok dengan data kami.',
     'throttle' => 'Terlalu banyak upaya masuk. Silahkan coba lagi dalam :seconds detik.',
+    'expired' => 'Sesi sudah berakhir. Silakan login kembali.',
 ];

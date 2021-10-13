@@ -29,15 +29,18 @@
         </ul>
     </li>
     <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
-        <i class="cil-briefcase c-sidebar-nav-icon"></i> Sidang</a>
+        <i class="cil-briefcase c-sidebar-nav-icon"></i> Pengajuan Sidang</a>
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.sidang.index') }}" class="c-sidebar-nav-link">
-                Daftar Bimbingan</a>
+                Daftar Pengajuan Sidang</a>
             </li>
             <li class="c-sidebar-nav-item"><a href="{{ route('mahasiswa.sidang.create') }}" class="c-sidebar-nav-link">
-                Tambah Sidang</a>
+                Tambah Pengajuan Sidang</a>
             </li>
         </ul>
+    </li>
+    <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('mahasiswa.pengujian.index') }}">
+        <i class="cil-badge c-sidebar-nav-icon"></i> Pengujian Sidang</a>
     </li>
     <li class="c-sidebar-nav-title">Data Pengguna</li>
     <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">

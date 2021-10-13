@@ -43,6 +43,10 @@ function () {
     Route::post('proposal/{proposal}/assign', 'ProposalController@assign')->name('proposal.assign');
     Route::resource('jadwal', 'JadwalController')->only(['index', 'show']);
     Route::resource('bimbingan', 'BimbinganController')->only(['index', 'show']);
+    Route::resource('sidang', 'SidangController')->only(['index', 'show', 'destroy']);
+    Route::post('sidang/{sidang}/approval', 'SidangController@approval')->name('sidang.approval');
+    Route::resource('jadwal_sidang', 'JadwalSidangController')->except(['show']);
+    Route::resource('pengujian', 'PengujianController');
 });
 
 Route::group([
@@ -66,6 +70,7 @@ function() {
     Route::resource('bimbingan', 'BimbinganController');
     Route::get('get_proposal', 'BimbinganController@getProposal')->name('bimbingan.get_proposal');
     Route::resource('sidang', 'SidangController');
+    Route::resource('pengujian', 'PengujianController')->only(['index', 'show']);
 });
 
 Route::group([
@@ -89,6 +94,7 @@ function() {
     Route::resource('bimbingan', 'BimbinganController')->only(['index', 'show', 'destroy']);
     Route::resource('sidang', 'SidangController')->only(['index', 'show']);
     Route::post('sidang/{sidang}/approval', 'SidangController@approval')->name('sidang.approval');
+    Route::resource('pengujian', 'PengujianController')->only(['index', 'show', 'update', 'edit']);
 });
 
 Route::group([
@@ -109,6 +115,8 @@ function() {
     // KP & Skripsi
     Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'destroy', 'edit', 'update']);
     Route::post('proposal/{proposal}/approval', 'ProposalController@approval')->name('proposal.approval');
+    Route::resource('sidang', 'SidangController')->only(['index', 'show']);
+    Route::post('sidang/{sidang}/approval', 'SidangController@approval')->name('sidang.approval');
 });
 
 Route::group([
@@ -129,4 +137,6 @@ function() {
     // KP & Skripsi
     Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'destroy', 'edit', 'update']);
     Route::post('proposal/{proposal}/approval', 'ProposalController@approval')->name('proposal.approval');
+    Route::resource('sidang', 'SidangController')->only(['index', 'show']);
+    Route::post('sidang/{sidang}/approval', 'SidangController@approval')->name('sidang.approval');
 });
