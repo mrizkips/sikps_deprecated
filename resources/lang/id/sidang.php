@@ -34,6 +34,7 @@ return [
             'not_found' => 'Sidang tidak ditemukan.',
             'expired' => 'Sudah melewati batas waktu pendaftaran.',
             'duplicate' => 'Sudah pernah mendaftar sidang dengan judul serupa di periode yang sama.',
+            'invalid_jenis' => 'Jenis sidang dan jenis proposal tidak sesuai.',
             'approve' => 'Sidang gagal disetujui.',
             'approved' => 'Sidang yang sudah disetujui tidak bisa dihapus.',
             'disapprove' => 'Sidang gagal ditolak.',

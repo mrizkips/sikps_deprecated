@@ -63,13 +63,13 @@
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
                 {data: 'nidn', name: 'nidn'},
                 {data: 'user.nama', name: 'user.nama'},
-                {data: 'user.email', name: 'user.email'},
-                {data: 'no_hp', name: 'no_hp'},
-                {data: 'keahlian', name: 'keahlian', defaultContent: '-'},
+                {data: 'user.email', name: 'user.email', orderable: false},
+                {data: 'no_hp', name: 'no_hp', orderable: false},
+                {data: 'keahlian', name: 'keahlian', defaultContent: '-', searchable: false, orderable: false},
                 {data: 'created_at', name: 'created_at'},
-                {data: 'action', name: 'action', 'searchable': false, orderable: false}
+                {data: 'action', name: 'action', searchable: false, orderable: false}
             ],
-            order: ['5', 'desc']
+            order: ['6', 'desc']
         });
     });
 </script>

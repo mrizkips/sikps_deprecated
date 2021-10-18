@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableJadwalSidang extends Migration
+class CreateTableFormPenilaianItem extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateTableJadwalSidang extends Migration
      */
     public function up()
     {
-        Schema::create('jadwal_sidang', function (Blueprint $table) {
+        Schema::create('form_penilaian_item', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('pendaftaran_id');
-            $table->date('tanggal');
-            $table->time('mulai');
-            $table->time('selesai');
-            $table->text('catatan')->nullable();
+            $table->unsignedSmallInteger('form_penilaian_id');
+            $table->string('nama', 60);
+            $table->integer('min')->nullable();
+            $table->integer('max')->nullable();
             $table->timestamps();
 
-            $table->foreign('pendaftaran_id')
-                ->references('id')->on('pendaftaran')
+            $table->foreign('form_penilaian_id')
+                ->references('id')->on('form_penilaian')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -37,6 +36,6 @@ class CreateTableJadwalSidang extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwal_sidang');
+        Schema::dropIfExists('form_penilaian_item');
     }
 }

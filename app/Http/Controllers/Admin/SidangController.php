@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Sidang;
 use App\Services\SidangService;
+use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Facades\DataTables;
 
 class SidangController extends Controller
@@ -18,7 +19,13 @@ class SidangController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $sidang = Sidang::query()->with(['proposal.dosen.user', 'proposal.mahasiswa.user', 'status', 'pendaftaran'])->select('sidang.*');
+            $sidang = Sidang::query()->with(['proposal.dosen.user', 'proposal.mahasiswa.user', 'status', 'pendaftaran'])
+            ->whereHas('status', function(Builder $query) {
+                $query->whereHas('approval', function(Builder $query) {
+                    $query->where([['role_id','3'],['tipe', '1']]);
+                });
+            })
+            ->select('sidang.*');
             return DataTables::eloquent($sidang)
                 ->addIndexColumn()
                 ->editColumn('jenis', 'components.sidang.jenis')
@@ -66,19 +73,7 @@ class SidangController extends Controller
             ]);
         }
 
-        if ($sidang->status->tipe == "1") {
-            return redirect()->back()->with('flash_messages', [
-                'type' => 'danger',
-                'message' => trans('sidang.messages.errors.approved'),
-            ]);
-        }
-
         if ($service->delete($sidang)) {
-            if (isset($sidang->penilaian_kp)) {
-                $this->deleteFile($sidang->penilaian_kp);
-            }
-            $this->deleteFile($sidang->laporan);
-
             return redirect()->back()->with('flash_messages', [
                 'type' => 'success',
                 'message' => trans('sidang.messages.success.delete'),

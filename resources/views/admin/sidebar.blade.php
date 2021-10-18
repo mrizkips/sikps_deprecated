@@ -27,17 +27,6 @@
         <i class="cil-briefcase c-sidebar-nav-icon"></i> Pengajuan Sidang</a>
     </li>
     <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
-        <i class="cil-paperclip c-sidebar-nav-icon"></i> Jadwal Sidang</a>
-        <ul class="c-sidebar-nav-dropdown-items">
-            <li class="c-sidebar-nav-item"><a href="{{ route('admin.jadwal_sidang.index') }}" class="c-sidebar-nav-link">
-                Daftar Jadwal Sidang</a>
-            </li>
-            <li class="c-sidebar-nav-item"><a href="{{ route('admin.jadwal_sidang.create') }}" class="c-sidebar-nav-link">
-                Tambah Jadwal Sidang</a>
-            </li>
-        </ul>
-    </li>
-    <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
         <i class="cil-badge c-sidebar-nav-icon"></i> Pengujian Sidang</a>
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item"><a href="{{ route('admin.pengujian.index') }}" class="c-sidebar-nav-link">
@@ -45,6 +34,18 @@
             </li>
             <li class="c-sidebar-nav-item"><a href="{{ route('admin.pengujian.create') }}" class="c-sidebar-nav-link">
                 Tambah Pengujian Sidang</a>
+            </li>
+        </ul>
+    </li>
+    <li class="c-sidebar-nav-title">Data Master</li>
+    <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
+        <i class="cil-settings c-sidebar-nav-icon"></i> Form Penilaian</a>
+        <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item"><a href="{{ route('admin.form_penilaian.index') }}" class="c-sidebar-nav-link">
+                Daftar Form Penilaian</a>
+            </li>
+            <li class="c-sidebar-nav-item"><a href="{{ route('admin.form_penilaian.create') }}" class="c-sidebar-nav-link">
+                Tambah Form Penilaian</a>
             </li>
         </ul>
     </li>

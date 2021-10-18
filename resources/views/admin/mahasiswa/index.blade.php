@@ -59,10 +59,10 @@
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
                 {data: 'nim', name: 'nim'},
                 {data: 'user.nama', name: 'user.nama'},
-                {data: 'user.email', name: 'user.email'},
-                {data: 'no_hp', name: 'no_hp'},
+                {data: 'user.email', name: 'user.email', orderable: false},
+                {data: 'no_hp', name: 'no_hp', orderable: false},
                 {data: 'created_at', name: 'created_at'},
-                {data: 'action', name: 'action', 'searchable': false, orderable: false}
+                {data: 'action', name: 'action', searchable: false, orderable: false}
             ],
             order: ['5', 'desc']
         });

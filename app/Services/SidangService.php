@@ -3,13 +3,18 @@
 namespace App\Services;
 
 use App\Models\Approval;
+use App\Models\Pendaftaran;
+use App\Models\Proposal;
 use App\Models\Sidang;
 use App\Models\Role;
+use App\Traits\Uploadable;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
 class SidangService
 {
+    use Uploadable;
+
     /**
      * Insert data to user table and dosen table.
      *
@@ -91,6 +96,10 @@ class SidangService
         DB::beginTransaction();
         try {
             throw_unless($sidang->status()->delete(), new Exception());
+            if (isset($sidang->penilaian_kp)) {
+                $this->deleteFile($sidang->penilaian_kp);
+            }
+            $this->deleteFile($sidang->laporan);
             $commit = $sidang->delete();
             DB::commit();
         } catch (Exception $e) {
@@ -189,5 +198,68 @@ class SidangService
         }
 
         return $commit;
+    }
+
+    /**
+     * Get proposal by jenis.
+     *
+     * @param int $jenis
+     * @return mixed
+     */
+    public function getProposal($jenis)
+    {
+        $mahasiswa = auth()->user()->mahasiswa;
+        $html = "<option>".trans('sidang.placeholders.proposal_id')."</option>";
+
+        if ($jenis == 3) {
+            $proposal = Proposal::approved()->kp()->where('mahasiswa_id', $mahasiswa->id)->get();
+        } else if ($jenis == 1 || $jenis == 2) {
+            $proposal = Proposal::approved()->skripsi()->where('mahasiswa_id', $mahasiswa->id)->get();
+        }
+
+        if (isset($proposal)) {
+            foreach ($proposal as $value) {
+                $html .= "<option value='{$value->id}'>{$value->judul}</option>";
+            }
+        }
+
+        return $html;
+    }
+
+    /**
+     * Check proposal duplication in the same pendaftaran.
+     *
+     * @param \App\Models\Pendaftaran $pendaftaran
+     * @param \App\Models\Proposal $proposal
+     * @return bool
+     */
+    public function isDuplicate(Pendaftaran $pendaftaran, Proposal $proposal)
+    {
+        $count = Sidang::where([
+            ['pendaftaran_id', $pendaftaran->id],
+            ['proposal_id', $proposal->id],
+        ])->count();
+
+        return ($count > 0);
+    }
+
+    /**
+     * Check jenis equals proposal jenis.
+     *
+     * @param mixed $jenis
+     * @param \App\Models\Proposal $proposal
+     * @return bool
+     */
+    public function jenisEqualProposal($jenis, Proposal $proposal)
+    {
+        $jenis_proposal = $proposal->jenis;
+
+        if ($jenis_proposal == '2' && $jenis == '3') {
+            return true;
+        } else if ($jenis_proposal == '1' && ($jenis == '1' || $jenis == '2')) {
+            return true;
+        }
+
+        return false;
     }
 }

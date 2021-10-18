@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@s@section('title', 'Bimbingan - '.config('app.name'))
+@section('title', 'Bimbingan - '.config('app.name'))
 
 @section('breadcrumbs')
     <li class="breadcrumb-item active">Bimbingan</li>

@@ -3,22 +3,22 @@
 return [
     '_' => 'Pengujian',
     'fields' => [
-        'pendaftaran_id' => 'Periode Pendaftaran',
-        'jadwal_sidang_id' => 'Jadwal Sidang',
+        'pendaftaran_id' => 'Periode Pendaftaran' ,
         'sidang_id' => 'Pengajuan Sidang',
-        'dosen_id' => 'Dosen Penguji',
-        'nilai_ppt' => 'Penilaian Presentasi',
-        'nilai_laporan' => 'Penilaian Laporan',
-        'nilai_aplikasi' => 'Penilaian Aplikasi',
+        'tanggal' => 'Tanggal',
+        'mulai' => 'Jam Mulai',
+        'selesai' => 'Jam Selesai',
+        'ruangan' => 'Ruangan',
+        'catatan' => 'Catatan Penguji',
     ],
     'placeholders' => [
         'pendaftaran_id' => 'Pilih Periode Pendaftaran',
-        'jadwal_sidang_id' => 'Pilih Jadwal Sidang',
         'sidang_id' => 'Pilih Pengajuan Sidang',
-        'dosen_id' => 'Masukkan Dosen Penguji',
-        'nilai_ppt' => 'Masukkan Penilaian Presentasi (0 - 100)',
-        'nilai_laporan' => 'Masukkan Penilaian Laporan (0 - 100)',
-        'nilai_aplikasi' => 'Masukkan Penilaian Aplikasi (0 - 100)',
+        'tanggal' => 'Masukkan Tanggal Sidang',
+        'mulai' => 'Masukkan Jam Mulai',
+        'selesai' => 'Masukkan Jam Selesai',
+        'ruangan' => 'Masukkan Ruangan Sidang',
+        'catatan' => 'Masukkan Catatan Penguji',
     ],
     'messages' => [
         'success' => [
@@ -31,8 +31,7 @@ return [
             'update' => 'Gagal merubah pengujian.',
             'delete' => 'Gagal menghapus pengujian.',
             'not_found' => 'Pengujian tidak ditemukan.',
-            'is_pembimbing' => 'Dosen penguji tidak boleh sama dengan dosen pembimbing.',
-            'is_existed' => 'Pengujian sudah ditambahkan di jadwal yang sama.',
+            'is_existed' => 'Pengujian sudah ditambahkan di periode pendaftaran yang sama.',
         ],
     ]
 ];

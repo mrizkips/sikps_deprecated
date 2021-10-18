@@ -16,26 +16,22 @@ class CreateTablePengujian extends Migration
         Schema::create('pengujian', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('jadwal_sidang_id');
+            $table->unsignedBigInteger('pendaftaran_id');
             $table->unsignedBigInteger('sidang_id');
-            $table->unsignedBigInteger('dosen_id');
-            $table->integer('nilai_ppt')->nullable();
-            $table->integer('nilai_laporan')->nullable();
-            $table->integer('nilai_aplikasi')->nullable();
+            $table->date('tanggal');
+            $table->time('mulai');
+            $table->time('selesai');
+            $table->string('ruangan');
+            $table->text('catatan')->nullable();
             $table->timestamps();
 
-            $table->foreign('jadwal_sidang_id')
-                ->references('id')->on('jadwal_sidang')
+            $table->foreign('pendaftaran_id')
+                ->references('id')->on('pendaftaran')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreign('sidang_id')
                 ->references('id')->on('sidang')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
-            $table->foreign('dosen_id')
-                ->references('id')->on('dosen')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

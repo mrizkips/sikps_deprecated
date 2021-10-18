@@ -19,18 +19,8 @@ class Pengujian extends Model
      * @var array
      */
     protected $fillable = [
-        'jadwal_sidang_id', 'sidang_id', 'dosen_id', 'nilai_ppt', 'nilai_laporan', 'nilai_aplikasi',
+        'pendaftaran_id', 'sidang_id', 'tanggal', 'mulai', 'selesai', 'ruangan', 'catatan',
     ];
-
-    /**
-     * Get jadwal sidang on a certain records.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function jadwal_sidang()
-    {
-        return $this->belongsTo(JadwalSidang::class, 'jadwal_sidang_id', 'id');
-    }
 
     /**
      * Get sidang on a certain records.
@@ -43,12 +33,22 @@ class Pengujian extends Model
     }
 
     /**
-     * Get dosen on a certain records.
+     * Get pendaftaran on a certain records.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function dosen()
+    public function pendaftaran()
     {
-        return $this->belongsTo(Dosen::class, 'dosen_id', 'id');
+        return $this->belongsTo(Pendaftaran::class, 'pendaftaran_id', 'id');
+    }
+
+    /**
+     * Get penguji on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function penguji()
+    {
+        return $this->hasMany(Penguji::class);
     }
 }

@@ -96,10 +96,17 @@ class SidangController extends Controller
         }
 
         $proposal = Proposal::find($request->proposal_id);
-        if ($this->isDuplicate($pendaftaran, $proposal)) {
+        if ($service->isDuplicate($pendaftaran, $proposal)) {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'danger',
                 'message' => trans('sidang.messages.errors.duplicate'),
+            ]);
+        }
+
+        if (!$service->jenisEqualProposal($request->jenis, $proposal)) {
+            return redirect()->back()->with('flash_messages', [
+                'type' => 'danger',
+                'message' => trans('sidang.messages.errors.invalid_jenis'),
             ]);
         }
 
@@ -155,10 +162,10 @@ class SidangController extends Controller
      * @param  \App\Models\Sidang           $sidang
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Sidang $sidang)
+    public function edit(Request $request, Sidang $sidang, SidangService $service)
     {
         if ($request->ajax()) {
-            return $this->getProposal($request->jenis);
+            return $service->getProposal($request->jenis);
         }
 
         $proposal = Proposal::approved()->where('mahasiswa_id', auth()->user()->mahasiswa->id)->get();
@@ -236,11 +243,6 @@ class SidangController extends Controller
         }
 
         if ($service->delete($sidang)) {
-            if (isset($sidang->penilaian_kp)) {
-                $this->deleteFile($sidang->penilaian_kp);
-            }
-            $this->deleteFile($sidang->laporan);
-
             return redirect()->back()->with('flash_messages', [
                 'type' => 'success',
                 'message' => trans('sidang.messages.success.delete'),
@@ -251,48 +253,5 @@ class SidangController extends Controller
             'type' => 'danger',
             'message' => trans('sidang.messages.errors.delete'),
         ]);
-    }
-
-    /**
-     * Get proposal by jenis.
-     *
-     * @param int $jenis
-     * @return mixed
-     */
-    protected function getProposal($jenis)
-    {
-        $mahasiswa = auth()->user()->mahasiswa;
-        $html = "<option>".trans('sidang.placeholders.proposal_id')."</option>";
-
-        if ($jenis == 3) {
-            $proposal = Proposal::approved()->kp()->where('mahasiswa_id', $mahasiswa->id)->get();
-        } else if ($jenis == 1 || $jenis == 2) {
-            $proposal = Proposal::approved()->skripsi()->where('mahasiswa_id', $mahasiswa->id)->get();
-        }
-
-        if (isset($proposal)) {
-            foreach ($proposal as $value) {
-                $html .= "<option value='{$value->id}'>{$value->judul}</option>";
-            }
-        }
-
-        return $html;
-    }
-
-    /**
-     * Check proposal duplication in the same pendaftaran.
-     *
-     * @param \App\Models\Pendaftaran $pendaftaran
-     * @param \App\Models\Proposal $proposal
-     * @return bool
-     */
-    protected function isDuplicate(Pendaftaran $pendaftaran, Proposal $proposal)
-    {
-        $count = Sidang::where([
-            ['pendaftaran_id', $pendaftaran->id],
-            ['proposal_id', $proposal->id],
-        ])->count();
-
-        return ($count > 0);
     }
 }
