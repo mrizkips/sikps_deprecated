@@ -112,9 +112,7 @@
                         <td>Form</td>
                         <td>Role</td>
                         <td>Tanggal Dibuat</td>
-                        @isset($form_penilaian)
                         <td>Aksi</td>
-                        @endisset
                     </tr>
                 </thead>
                 <tbody>
@@ -131,7 +129,6 @@
                             <td>{{ $item->form_penilaian->nama }}</td>
                             <td>{{ config('constant.penilai')[$item->form_penilaian->penilai] }}</td>
                             <td>{{ $item->created_at }}</td>
-                            @isset($form_penilaian)
                             <td>
                                 @include('components.show', ['url' => route(auth()->user()->role->nama.'.penilaian.show', ['pengujian' => $pengujian, 'penilaian' => $item])])
                                 @if ($item->user_id == auth()->user()->id)
@@ -139,7 +136,6 @@
                                 @include('components.delete', ['url' => route(auth()->user()->role->nama.'.penilaian.destroy', ['pengujian' => $pengujian, 'penilaian' => $item])])
                                 @endif
                             </td>
-                            @endisset
                         </tr>
                     @endforeach
                 </tbody>

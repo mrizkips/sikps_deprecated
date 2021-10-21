@@ -80,6 +80,9 @@ function() {
     Route::get('get_proposal', 'BimbinganController@getProposal')->name('bimbingan.get_proposal');
     Route::resource('sidang', 'SidangController');
     Route::resource('pengujian', 'PengujianController')->only(['index', 'show']);
+    Route::group(['prefix' => 'pengujian/{pengujian}'], function() {
+        Route::resource('penilaian', 'PenilaianController')->only(['show']);
+    });
 });
 
 Route::group([
