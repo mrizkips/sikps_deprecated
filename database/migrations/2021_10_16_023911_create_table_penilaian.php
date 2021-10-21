@@ -16,18 +16,18 @@ class CreateTablePenilaian extends Migration
         Schema::create('penilaian', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('dosen_id');
-            $table->unsignedBigInteger('sidang_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('pengujian_id');
             $table->unsignedSmallInteger('form_penilaian_id');
             $table->timestamps();
 
-            $table->foreign('dosen_id')
-                ->references('id')->on('dosen')
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreign('sidang_id')
-                ->references('id')->on('sidang')
+            $table->foreign('pengujian_id')
+                ->references('id')->on('pengujian')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

@@ -11,9 +11,15 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="sidang" class="col-md-3 col-form-label">Pengajuan Sidang</label>
+    <label for="nama" class="col-md-3 col-form-label">Nama Mahasiswa</label>
     <div class="col-md">
-        <input type="text" name="sidang" id="sidang" value="{{ $pengujian->sidang->proposal->judul }} - {{ $pengujian->sidang->proposal->mahasiswa->user->nama }}" class="form-control-plaintext" disabled>
+        <input type="text" name="nama" id="nama" value="{{ $pengujian->sidang->proposal->mahasiswa->user->nama }}" class="form-control-plaintext" disabled>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="judul" class="col-md-3 col-form-label">Judul Proposal</label>
+    <div class="col-md">
+        <input type="text" name="judul" id="judul" value="{{ $pengujian->sidang->proposal->judul }}" class="form-control-plaintext" disabled>
     </div>
 </div>
 <div class="form-group row">
@@ -45,9 +51,11 @@
 <div class="form-group row">
     <label for="penguji" class="col-md-3 col-form-label">Penguji</label>
     <div class="col-md">
-        <a href="{{ route("admin.penguji.create", $pengujian->id) }}" class="btn btn-primary mb-2">
-            <i class="cil-plus"></i> Tambah Penguji
-        </a>
+        @auth('admin')
+            <a href="{{ route("admin.penguji.create", $pengujian->id) }}" class="btn btn-primary mb-2">
+                <i class="cil-plus"></i> Tambah Penguji
+            </a>
+        @endauth
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable">
                 <thead>
@@ -56,7 +64,9 @@
                         <td>Dosen Penguji</td>
                         <td>Role</td>
                         <td>Tanggal Dibuat</td>
+                        @auth('admin')
                         <td>Aksi</td>
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
@@ -72,10 +82,64 @@
                             <td>{{ $item->dosen->user->nama }}</td>
                             <td>Penguji {{ $item->role }}</td>
                             <td>{{ $item->created_at }}</td>
+                            @auth('admin')
                             <td>
                                 @include('components.edit', ['url' => route('admin.penguji.edit', ['pengujian' => $pengujian, 'penguji' => $item])])
                                 @include('components.delete', ['url' => route('admin.penguji.destroy', ['pengujian' => $pengujian, 'penguji' => $item])])
                             </td>
+                            @endauth
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="penilaian" class="col-md-3 col-form-label">Penilaian</label>
+    <div class="col-md">
+        @isset($form_penilaian)
+        <a href="{{ route(auth()->user()->role->nama.".penilaian.create", $pengujian->id) }}" class="btn btn-primary mb-2">
+            <i class="cil-plus"></i> Tambah Penilaian
+        </a>
+        @endisset
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Penilai</td>
+                        <td>Form</td>
+                        <td>Role</td>
+                        <td>Tanggal Dibuat</td>
+                        @isset($form_penilaian)
+                        <td>Aksi</td>
+                        @endisset
+                    </tr>
+                </thead>
+                <tbody>
+                    @if($pengujian->penilaian->isEmpty())
+                        <tr>
+                            <td colspan="5">Data tidak ditemukan.</td>
+                        </tr>
+                    @endif
+
+                    @foreach ($pengujian->penilaian as $key => $item)
+                        <tr>
+                            <td>{{ ++$key }}</td>
+                            <td>{{ $item->user->nama }}</td>
+                            <td>{{ $item->form_penilaian->nama }}</td>
+                            <td>{{ config('constant.penilai')[$item->form_penilaian->penilai] }}</td>
+                            <td>{{ $item->created_at }}</td>
+                            @isset($form_penilaian)
+                            <td>
+                                @include('components.show', ['url' => route(auth()->user()->role->nama.'.penilaian.show', ['pengujian' => $pengujian, 'penilaian' => $item])])
+                                @if ($item->user_id == auth()->user()->id)
+                                @include('components.edit', ['url' => route(auth()->user()->role->nama.'.penilaian.edit', ['pengujian' => $pengujian, 'penilaian' => $item])])
+                                @include('components.delete', ['url' => route(auth()->user()->role->nama.'.penilaian.destroy', ['pengujian' => $pengujian, 'penilaian' => $item])])
+                                @endif
+                            </td>
+                            @endisset
                         </tr>
                     @endforeach
                 </tbody>

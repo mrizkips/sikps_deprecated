@@ -26,5 +26,12 @@ return [
         '1' => 'Sidang Skripsi',
         '2' => 'Pra-Sidang Skripsi',
         '3' => 'Sidang KP',
+    ],
+
+    'penilai' => [
+        '1' => 'Admin',
+        '2' => 'Penguji 1',
+        '3' => 'Penguji 2',
+        '4' => 'Pembimbing',
     ]
 ];

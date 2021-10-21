@@ -25,10 +25,12 @@
                                         <tr>
                                             <td>#</td>
                                             <td>Jadwal</td>
+                                            <td>Ruangan</td>
                                             <td>Mahasiswa</td>
                                             <td>Judul Laporan</td>
                                             <td>Dosen Pembimbing</td>
-                                            <td>Dosen Penguji</td>
+                                            <td>Penguji</td>
+                                            <td>Periode Pendaftaran</td>
                                             <td>Tanggal Dibuat</td>
                                             <td>Aksi</td>
                                         </tr>
@@ -58,15 +60,17 @@
             ajax: "{{ route('mahasiswa.pengujian.index') }}",
             columns: [
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
-                {data: 'jadwal_sidang.tanggal', name: 'jadwal_sidang.tanggal'},
+                {data: 'tanggal', name: 'tanggal'},
+                {data: 'ruangan', name: 'ruangan'},
                 {data: 'sidang.proposal.mahasiswa.user.nama', name: 'sidang.proposal.mahasiswa.user.nama'},
                 {data: 'sidang.proposal.judul', name: 'sidang.proposal.judul'},
                 {data: 'sidang.proposal.dosen.user.nama', name: 'sidang.proposal.dosen.user.nama'},
-                {data: 'dosen.user.nama', name: 'dosen.user.nama'},
+                {data: 'dosen_penguji', name: 'dosen_penguji', orderable: false, searchable: false},
+                {data: 'pendaftaran.judul', name: 'pendaftaran.judul'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', searchable: false, orderable: false}
             ],
-            order: ['6', 'desc']
+            order: ['8', 'desc']
         });
     });
 </script>

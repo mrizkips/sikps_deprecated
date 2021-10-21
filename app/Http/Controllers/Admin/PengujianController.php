@@ -110,11 +110,13 @@ class PengujianController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Pengujian $pengujian
+     * @param  \App\Services\PengujianService $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Pengujian $pengujian)
+    public function show(Pengujian $pengujian, PengujianService $service)
     {
-        return view('admin.pengujian.show', compact('pengujian'));
+        $form_penilaian = $service->checkFormPenilaian(auth()->user(), $pengujian);
+        return view('admin.pengujian.show', compact('pengujian', 'form_penilaian'));
     }
 
     /**

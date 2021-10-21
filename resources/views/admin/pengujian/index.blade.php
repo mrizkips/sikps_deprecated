@@ -73,7 +73,7 @@
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', searchable: false, orderable: false}
             ],
-            order: ['5', 'desc']
+            order: ['8', 'desc']
         });
     });
 </script>

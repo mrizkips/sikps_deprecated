@@ -51,4 +51,14 @@ class Pengujian extends Model
     {
         return $this->hasMany(Penguji::class);
     }
+
+    /**
+     * Get penilaian on a certain records.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function penilaian()
+    {
+        return $this->hasMany(Penilaian::class);
+    }
 }

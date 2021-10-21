@@ -48,6 +48,7 @@ function () {
     Route::resource('pengujian', 'PengujianController');
     Route::group(['prefix' => 'pengujian/{pengujian}'], function() {
         Route::resource('penguji', 'PengujiController')->except(['show', 'index']);
+        Route::resource('penilaian', 'PenilaianController')->except(['index']);
     });
 
     // Data Master
@@ -102,7 +103,10 @@ function() {
     Route::resource('bimbingan', 'BimbinganController')->only(['index', 'show', 'destroy']);
     Route::resource('sidang', 'SidangController')->only(['index', 'show']);
     Route::post('sidang/{sidang}/approval', 'SidangController@approval')->name('sidang.approval');
-    Route::resource('pengujian', 'PengujianController')->only(['index', 'show', 'update', 'edit']);
+    Route::resource('pengujian', 'PengujianController')->only(['index', 'show']);
+    Route::group(['prefix' => 'pengujian/{pengujian}'], function() {
+        Route::resource('penilaian', 'PenilaianController')->except(['index']);
+    });
 });
 
 Route::group([

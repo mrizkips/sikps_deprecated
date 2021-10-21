@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sidang extends Model
 {
+    const IS_SKRIPSI = 1;
+    const IS_PRASKRIPSI = 2;
+    const IS_KP = 3;
+
     /**
      * The table associated with the model.
      *
