@@ -169,7 +169,7 @@ class SidangController extends Controller
         }
 
         $proposal = Proposal::approved()->where('mahasiswa_id', auth()->user()->mahasiswa->id)->get();
-        $pendaftaran = Pendaftaran::sidang()->active()->get();
+        $pendaftaran = Pendaftaran::where('id', $sidang->pendaftaran_id)->get();
         return view('mahasiswa.sidang.form', compact('proposal', 'pendaftaran', 'sidang'));
     }
 

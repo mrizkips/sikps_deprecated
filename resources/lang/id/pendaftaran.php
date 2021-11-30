@@ -23,9 +23,9 @@ return [
             'delete' => 'Pendaftaran berhasil dihapus.'
         ],
         'errors' => [
-            'create' => 'Gagal menambahkan dosen.',
-            'update' => 'Gagal merubah dosen.',
-            'delete' => 'Gagal menghapus dosen.',
+            'create' => 'Gagal menambahkan pendaftaran.',
+            'update' => 'Gagal merubah pendaftaran.',
+            'delete' => 'Gagal menghapus pendaftaran.',
             'not_found' => 'Pendaftaran tidak ditemukan.',
         ],
     ]

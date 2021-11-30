@@ -73,6 +73,13 @@ class SidangController extends Controller
             ]);
         }
 
+        if ($sidang->status->tipe == "1") {
+            return redirect()->back()->with('flash_messages', [
+                'type' => 'danger',
+                'message' => trans('sidang.messages.errors.approved'),
+            ]);
+        }
+
         if ($service->delete($sidang)) {
             return redirect()->back()->with('flash_messages', [
                 'type' => 'success',
