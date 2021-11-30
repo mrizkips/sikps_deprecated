@@ -136,6 +136,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <small class="form-text text-muted mb-2">
+                                        Tanggal Lahir
+                                    </small>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">

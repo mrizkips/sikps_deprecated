@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard Mahasiswa</div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card bg-primary text-white">
+                <div class="card-header">Selamat Datang</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Halo, {{ auth()->user()->nama }}
                 </div>
             </div>
         </div>
