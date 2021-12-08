@@ -14,6 +14,8 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
+mix.copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/css');
+
 // Icons
 mix.copy('node_modules/@coreui/icons/fonts', 'public/fonts');
 mix.copy('node_modules/@coreui/icons/css/all.min.css', 'public/css');

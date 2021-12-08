@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Sidang;
 use App\Services\SidangService;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -124,5 +125,17 @@ class SidangController extends Controller
             'type' => 'danger',
             'message' => $error,
         ]);
+    }
+
+    /**
+     * Export data.
+     *
+     * @return   \Barryvdh\DomPDF\PDF
+     */
+    public function export()
+    {
+        $data = Sidang::all();
+        $pdf = PDF::loadView('admin.sidang.export', compact('data'));
+        return $pdf->stream('Pengajuan_Sidang.pdf');
     }
 }

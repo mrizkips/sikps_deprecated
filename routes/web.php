@@ -38,11 +38,13 @@ function () {
 
     // KP & Skripsi
     Route::resource('pendaftaran', 'PendaftaranController')->except(['show']);
+    Route::get('proposal/export', 'ProposalController@export')->name('proposal.export');
     Route::resource('proposal', 'ProposalController')->except(['create', 'store', 'edit', 'update']);
     Route::post('proposal/{proposal}/approval', 'ProposalController@approval')->name('proposal.approval');
     Route::post('proposal/{proposal}/assign', 'ProposalController@assign')->name('proposal.assign');
     Route::resource('jadwal', 'JadwalController')->only(['index', 'show']);
     Route::resource('bimbingan', 'BimbinganController')->only(['index', 'show']);
+    Route::get('sidang/export', 'SidangController@export')->name('sidang.export');
     Route::resource('sidang', 'SidangController')->only(['index', 'show', 'destroy']);
     Route::post('sidang/{sidang}/approval', 'SidangController@approval')->name('sidang.approval');
     Route::resource('pengujian', 'PengujianController');

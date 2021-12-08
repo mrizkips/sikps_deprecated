@@ -17,6 +17,9 @@
                     <div class="card card-accent-primary">
                         <div class="card-header">
                             <strong class="text-primary">List Sidang</strong>
+                            <a href="{{ route('admin.sidang.export') }}" class="btn btn-primary float-right">
+                                <i class="cil-file"></i> Export
+                            </a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

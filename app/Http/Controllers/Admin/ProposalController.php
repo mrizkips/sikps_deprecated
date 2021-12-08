@@ -8,6 +8,7 @@ use App\Models\Dosen;
 use App\Models\Proposal;
 use App\Services\ProposalService;
 use App\Traits\Uploadable;
+use Barryvdh\DomPDF\Facade as PDF;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProposalController extends Controller
@@ -148,5 +149,17 @@ class ProposalController extends Controller
             'type' => 'danger',
             'message' => trans('proposal.messages.errors.assign'),
         ]);
+    }
+
+    /**
+     * Export data.
+     *
+     * @return   \Barryvdh\DomPDF\PDF
+     */
+    public function export()
+    {
+        $data = Proposal::all();
+        $pdf = PDF::loadView('admin.proposal.export', compact('data'));
+        return $pdf->stream('Pengajuan_Proposal.pdf');
     }
 }
