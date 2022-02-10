@@ -18,7 +18,7 @@ class CreateTablePenilaianItem extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('penilaian_id');
             $table->unsignedBigInteger('form_penilaian_item_id');
-            $table->integer('nilai')->nullable();
+            $table->float('nilai')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
 

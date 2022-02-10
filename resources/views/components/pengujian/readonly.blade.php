@@ -112,16 +112,21 @@
                         <td>Form</td>
                         <td>Role</td>
                         <td>Tanggal Dibuat</td>
+                        <td>Total</td>
                         <td>Aksi</td>
                     </tr>
                 </thead>
                 <tbody>
                     @if($pengujian->penilaian->isEmpty())
                         <tr>
-                            <td colspan="5">Data tidak ditemukan.</td>
+                            <td colspan="7">Data tidak ditemukan.</td>
                         </tr>
                     @endif
 
+                    @php
+                        $nilai = 0;
+                        $row = 0;
+                    @endphp
                     @foreach ($pengujian->penilaian as $key => $item)
                         <tr>
                             <td>{{ ++$key }}</td>
@@ -129,6 +134,25 @@
                             <td>{{ $item->form_penilaian->nama }}</td>
                             <td>{{ config('constant.penilai')[$item->form_penilaian->penilai] }}</td>
                             <td>{{ $item->created_at }}</td>
+                            <td>
+                            @php
+                                $total = 0;
+                                $row = $row + 1;
+                            @endphp
+                            @foreach ($item->penilaian_item as $item_nilai)
+                                @php
+                                    if ($pengujian->sidang->jenis == 3) {
+                                        $total = $total + $item_nilai->nilai;
+                                    }
+                                @endphp
+                            @endforeach
+                            @php
+                                if ($pengujian->sidang->jenis == 3) {
+                                    $nilai = $nilai + $total;
+                                }
+                            @endphp
+                            {{ $total }}
+                            </td>
                             <td>
                                 @include('components.show', ['url' => route(auth()->user()->role->nama.'.penilaian.show', ['pengujian' => $pengujian, 'penilaian' => $item])])
                                 @if ($item->user_id == auth()->user()->id)
@@ -138,6 +162,16 @@
                             </td>
                         </tr>
                     @endforeach
+                    @if ($pengujian->sidang->jenis == 3 && $row == 3)
+                        <tr>
+                            <td colspan="5">Nilai Angka</td>
+                            <td colspan="2">{{ $nilai }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">Nilai Huruf</td>
+                            <td colspan="2">{{ grader($nilai) }}</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

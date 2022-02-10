@@ -28,6 +28,7 @@
             'required' => false,
             'autofocus' => false,
             'placeholder' => isset($item->min) ? "Nilai {$item->min} - {$item->max}" : $item->nama,
+            'step' => 0.1,
         ])
         <input type="hidden" name="{{ str_replace([' '],'_',$item->nama)."_id" }}" value="{{ $item->id }}" class="d-none">
     </div>

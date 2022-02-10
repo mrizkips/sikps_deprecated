@@ -9,6 +9,9 @@
     @isset($readonly)
         @if($readonly) readonly @endif
     @endisset
+    @isset($step)
+        @if($step) step="{{ $step }}" @endif
+    @endisset
 >
 @error($name)
     <span class="invalid-feedback" role="alert">

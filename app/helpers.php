@@ -46,3 +46,20 @@ if (!function_exists('pin_generator')) {
         return substr(str_shuffle("0123456789"), 0, $digits);
     }
 }
+
+if (!function_exists('grader')) {
+    function grader($mark)
+    {
+        if ($mark >= 80 && $mark <= 100) {
+            return "A";
+        } else if ($mark >= 70 && $mark < 80) {
+            return "B";
+        } else if ($mark >= 55 && $mark < 70) {
+            return "C";
+        } else if ($mark >= 40 && $mark < 55) {
+            return "D";
+        } else if ($mark < 40) {
+            return "E";
+        }
+    }
+}

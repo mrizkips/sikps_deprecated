@@ -13,7 +13,7 @@
             </i>&nbsp;Data</strong>&nbsp;<small>Pengujian Sidang</small>
         </h3>
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card card-accent-primary">
                     <div class="card-header"><strong class="text-primary">Data Pengujian Sidang</strong></div>
                     <div class="card-body">

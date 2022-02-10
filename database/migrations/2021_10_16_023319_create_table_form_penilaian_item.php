@@ -18,8 +18,8 @@ class CreateTableFormPenilaianItem extends Migration
             $table->bigIncrements('id');
             $table->unsignedSmallInteger('form_penilaian_id');
             $table->string('nama', 60);
-            $table->integer('min')->nullable();
-            $table->integer('max')->nullable();
+            $table->smallInteger('min')->nullable();
+            $table->smallInteger('max')->nullable();
             $table->timestamps();
 
             $table->foreign('form_penilaian_id')
